@@ -1,0 +1,29 @@
+{
+  "name": "datagov-site-analytics",
+  "version": "0.0.1",
+  "description": "Visualisation of the usage of data.gov.uk",
+  "author": "Tim Cowlishaw <tim@timcowlishaw.co.uk>",
+  "scripts": {
+    "preinstall": "npm install -g gulp"
+  },
+  "devDependencies": {
+    "domready": "~1.0.5",
+    "gulp": "~3.7.0",
+    "gulp-cssmin": "~0.1.5",
+    "gulp-connect": "~2.0.5",
+    "gulp-concat": "~2.2.0",
+    "gulp-watch": "~0.6.5",
+    "gulp-debug": "~0.3.0",
+    "vinyl-source-stream": "~0.1.1",
+    "browserify": "~4.1.8",
+    "d3-browserify": "~3.3.13",
+    "gulp-jshint": "~1.6.3",
+    "mustache": "~0.8.2",
+    "slick": "~1.12.1",
+    "underscore": "~1.6.0",
+    "brfs": "~1.1.1",
+    "dom-events": "~0.1.1",
+    "dom-style": "0.0.2",
+    "computed-style": "~0.1.3"
+  }  
+}
