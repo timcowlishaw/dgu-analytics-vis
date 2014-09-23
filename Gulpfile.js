@@ -48,7 +48,7 @@ gulp.task("browserify", function() {
 
 gulp.task('lint', function() {
   return gulp.src('./src/js/**/*.js')
-    .pipe(jshint())
+    .pipe(jshint({node: true, strict: true, sub: true}))
     .pipe(jshint.reporter('default'));
 });
 
