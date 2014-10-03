@@ -10,8 +10,20 @@ Publisher.prototype = {
     return this._data["Publisher Name"]; 
   },
 
+  title: function() {
+    return this._data["Publisher Title"]; 
+  },
+
+  subtitle: function() {
+    return ""; 
+  },
+
   visits : function() {
-    return this._data["Visits"]; 
+    return parseInt(this._data["Visits"]); 
+  },
+
+  views: function() {
+    return this._data["Views"]; 
   },
 
   datasets : function() {

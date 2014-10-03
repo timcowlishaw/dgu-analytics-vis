@@ -10,8 +10,20 @@ Dataset.prototype = {
     return this._data["Dataset Name"]; 
   },
 
+  title: function() {
+    return this._data["Dataset Title"]; 
+  },
+
+  subtitle: function() {
+    return this.publisher().title(); 
+  },
+
   visits: function() {
-    return this._data["Visits"]; 
+    return parseInt(this._data["Visits"]); 
+  },
+
+  views: function() {
+    return this._data["Views"]; 
   },
 
   publisher: function() {
