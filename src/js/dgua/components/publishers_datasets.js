@@ -16,7 +16,7 @@ PublishersDatasets.prototype = {
   _departmentsColumnSelector: ".departments",
 
   render: function(selector) {
-    render(this._template, selector);
+    render.toSelector(this._template, selector);
     this._publishersColumn.render(selector + "  " + this._publishersColumnSelector);
     this._datasetsColumn.render(selector + "  " + this._datasetsColumnSelector);
   }
