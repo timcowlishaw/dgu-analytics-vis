@@ -6,7 +6,10 @@ var concat     = require('gulp-concat');
 var watch      = require("gulp-watch");
 var debug      = require("gulp-debug");
 var source     = require("vinyl-source-stream");
-var jshint       = require("gulp-jshint");
+var jshint     = require("gulp-jshint");
+var buffer     = require("vinyl-buffer");
+var uglify     = require("gulp-uglify");
+var sourcemaps = require("gulp-sourcemaps");
 
 var srcDir      = "./src/";
 var destDir     = "dist/";
@@ -42,6 +45,10 @@ gulp.task("browserify", function() {
     .transform("brfs")
     .bundle({debug: true})
     .pipe(source(jsDestFile))
+    .pipe(buffer())
+    .pipe(sourcemaps.init({loadMaps: true}))
+    .pipe(uglify())
+    .pipe(sourcemaps.write("./"))
     .pipe(gulp.dest(jsDest));
 });
 
