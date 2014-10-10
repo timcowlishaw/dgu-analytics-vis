@@ -10,6 +10,7 @@ var _ = require("underscore");
 var VisitableList = function(app, visitables) {
   this._app = app;
   this._visitables = visitables;
+  this._app.registerMessageHandler("highlightPublisher", bind(this, this._onHighlightPublisher));
 };
 
 VisitableList.prototype = {
@@ -34,9 +35,26 @@ VisitableList.prototype = {
       visits_proportion: (item.visitsProportion() * 100).toFixed(1) + "%",
       visits: item.visits(),
       views: item.views(),
-      color: item.color()
+      color: item.color(),
+      publisher_id: item.publisher().id()
     }; 
-  }
+  },
+
+  _onHighlightPublisher: function(publisher) {
+    var allElements = slick.search(".visitable", this._element);
+
+    _.each(allElements, function(element) {
+      dom.removeClass(element, "highlighted"); 
+      dom.removeClass(element, "not-highlighted");
+      if(publisher) {
+        if(dom.hasClass(element, "publisher-" + publisher.id())) {
+          dom.addClass(element,"highlighted");
+        } else {
+          dom.addClass(element,"not-highlighted");
+        }
+      }
+    });
+  },
 };
 
 module.exports = VisitableList;

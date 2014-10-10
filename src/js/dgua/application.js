@@ -10,6 +10,7 @@ var ColorKey = require("./util/color_key");
 var Application = function(selector, dataPath) {
   this._selector = selector;
   this._dataPath = dataPath;
+  this._messageHandlers = {};
 };
 
 Application.prototype = {
@@ -49,6 +50,23 @@ Application.prototype = {
       
       publishersDatasets.render(this._selector);
     }));
+  },
+
+  registerMessageHandler: function(messageName, handler) {
+    if(!this._messageHandlers[messageName]) {
+      this._messageHandlers[messageName] = [];
+    }
+    this._messageHandlers[messageName].push(handler);
+  },
+
+  sendMessage: function() {
+    var payload = Array.prototype.slice.apply(arguments);
+    var messageName = payload.shift();
+    if(this._messageHandlers[messageName]) {
+      this._messageHandlers[messageName].forEach(function(h) {
+        h.apply(null, payload);
+      });
+    }
   },
 
   _topN: function(collection) {

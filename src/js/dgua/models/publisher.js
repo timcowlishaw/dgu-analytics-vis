@@ -29,6 +29,10 @@ Publisher.prototype = {
   datasets : function() {
     return this._getDatasets(this);
   },
+
+  publisher: function() {
+    return this;
+  }
 };
 
 module.exports = Publisher;

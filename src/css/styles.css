@@ -51,6 +51,11 @@ h1, h2, h3, h4, h5, h6 {
   padding-right: 1em;
 }
 
+.visitable_list li.not-highlighted {
+  color: #ddd;
+  border-left-color: #ddd;
+}
+
 .visitable_list .stats .n {
   font-weight: bold;
 }
