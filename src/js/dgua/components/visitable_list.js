@@ -34,6 +34,7 @@ VisitableList.prototype = {
       visits_proportion: (item.visitsProportion() * 100).toFixed(1) + "%",
       visits: item.visits(),
       views: item.views(),
+      color: item.color()
     }; 
   }
 };
