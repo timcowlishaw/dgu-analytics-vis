@@ -6,6 +6,7 @@ var fs = require("fs");
 var dom = require("ampersand-dom");
 var slick = require("slick");
 var _ = require("underscore");
+var events = require("dom-events");
 
 var VisitableList = function(app, visitables) {
   this._app = app;
@@ -22,9 +23,16 @@ VisitableList.prototype = {
     this._element = document.createElement("ul");
     dom.addClass(this._element, "visitable_list");
     container.appendChild(this._element);
+    this._renderVisitables();
+  },
+
+  _renderVisitables: function() {
+    dom.text(this._element, "");
     _.each(this._visitables, bind(this, function(visitable) {
       var child = render.toNode(this._itemTemplate, this._templateParameters(visitable));
       this._element.appendChild(child);
+      events.on(child, "mouseover", bind(this, function() { this._onHover(visitable); }));
+      events.on(child, "click", bind(this, function(event) { event.preventDefault(); this._onClick(visitable); }));
     }));
   },
 
@@ -38,6 +46,20 @@ VisitableList.prototype = {
       color: item.color(),
       publisher_id: item.publisher().id()
     }; 
+  },
+
+  update: function(visitables) {
+    this._visitables = visitables;
+    this._renderVisitables();
+  },
+
+  //FIXME this is publisher-specific, not for all visitables. extract.
+  _onClick: function(visitable) {
+    this._app.sendMessage("selectPublisher", visitable.publisher());
+  },
+
+  _onHover: function(visitable) {
+    this._app.sendMessage("highlightPublisher", visitable.publisher());
   },
 
   _onHighlightPublisher: function(publisher) {

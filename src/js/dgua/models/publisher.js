@@ -1,4 +1,6 @@
 "use strict";
+var withVisitProportions = require("../util/with_visit_proportions");
+
 
 var Publisher = function(data, getDatasets) {
   this._data = data;
@@ -27,7 +29,7 @@ Publisher.prototype = {
   },
 
   datasets : function() {
-    return this._getDatasets(this);
+    return withVisitProportions(this._getDatasets(this), this.visits());
   },
 
   publisher: function() {
