@@ -12,6 +12,7 @@ a:hover {
 }
 
 body {
+  background-color: #efefef;
   color: #333;
   margin: 2em auto;
   max-width: 64em;

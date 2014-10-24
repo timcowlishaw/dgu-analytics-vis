@@ -17,6 +17,7 @@ VisitablePie.prototype = {
   _rightMargin: 150,
 
   _notHighlightedColor: "#ddd",
+  _backgroundColor: "#efefef",
 
   render: function(selector) {
     this._element = slick.find(selector);  
@@ -43,7 +44,7 @@ VisitablePie.prototype = {
     this._slice = svg.datum(this._visitables).selectAll("path").data(this._layout)
       .enter().append("path")
       .style("fill", function(d) { return d.data.color(); })
-      .style("stroke", "#fff")
+      .style("stroke", this._backgroundColor)
       .style("stroke-width", 1)
       .attr("d", this._arc)
       .on("mouseover", bind(this, this._onMouseOver))
