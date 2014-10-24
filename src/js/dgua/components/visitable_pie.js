@@ -16,8 +16,7 @@ VisitablePie.prototype = {
   _leftMargin: 50,
   _rightMargin: 150,
 
-  _highlightedRadiusCoeff: 1,
-  _notHighlightedRadiusCoeff: 0.3,
+  _notHighlightedColor: "#ddd",
 
   render: function(selector) {
     this._element = slick.find(selector);  
@@ -53,13 +52,15 @@ VisitablePie.prototype = {
 
   _onHighlightPublisher: function(publisher) {
     if(publisher) {
-      this._arc.outerRadius(bind(this, function(d) {
-        var highlightRadius = this._highlightedRadiusCoeff * this._radius;
-        var notHighlightRadius = this._notHighlightedRadiusCoeff * this._radius;
-        return publisher.id() == d.data.id() ? highlightRadius : notHighlightRadius;
+      this._slice.style("fill", bind(this, function(d) { 
+        if(d.data.publisher().id() == publisher.id()) {  
+          return d.data.color();
+        } else {
+          return this._notHighlightedColor; 
+        }
       }));
     } else {
-      this._arc.outerRadius(this._radius);
+      this._slice.style("fill", function(d) { return d.data.color(); });
     }
     this._slice.attr("d", this._arc);
   },

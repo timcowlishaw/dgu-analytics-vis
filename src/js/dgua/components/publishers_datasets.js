@@ -13,7 +13,6 @@ var PublishersDatasets = function(app, publishersColumn, datasetsColumn, publish
   //or passed in?
   this._publishersColorKey = publishersColorKey;
   this._topN = topN;
-  console.log(this, this._publishersColorKey);
   this._app.registerMessageHandler("selectPublisher", bind(this, this._onSelectPublisher));
 };
 
@@ -32,7 +31,6 @@ PublishersDatasets.prototype = {
 
   _onSelectPublisher: function(publisher) {
     this._datasetsColumn.update(_.map(_.first(publisher.datasets(), this._topN), bind(this, function(dataset) {
-      console.log(this, this._publishersColorKey);
       return this._publishersColorKey.withColor(dataset, dataset.publisher().id()); 
     })));
   },
