@@ -4,11 +4,13 @@ var slick = require("slick");
 var d3 = require("d3-browserify");
 var dom = require("ampersand-dom");
 var bind = require("../util/bind");
+var _ = require("underscore");
 
 var VisitablePie = function(app, visitables) {
   this._app = app;
   this._visitables = visitables;
   this._app.registerMessageHandler("highlightPublisher", bind(this, this._onHighlightPublisher));
+  this._app.registerMessageHandler("selectPublisher", bind(this, this._onSelectPublisher));
 };
 
 VisitablePie.prototype = {
@@ -48,13 +50,15 @@ VisitablePie.prototype = {
       .style("stroke-width", 1)
       .attr("d", this._arc)
       .on("mouseover", bind(this, this._onMouseOver))
-      .on("mouseout", bind(this, this._onMouseOut));
+      .on("mouseout", bind(this, this._onMouseOut))
+      .on("mousedown", bind(this, this._onClick));
   },
 
   _onHighlightPublisher: function(publisher) {
+    if(!publisher) publisher = this._selectedPublisher;
     if(publisher) {
       this._slice.style("fill", bind(this, function(d) { 
-        if(d.data.publisher().id() == publisher.id()) {  
+        if(_.contains([publisher.id(), this._selectedPublisher && this._selectedPublisher.id()], d.data.publisher().id())) {  
           return d.data.color();
         } else {
           return this._notHighlightedColor; 
@@ -66,10 +70,19 @@ VisitablePie.prototype = {
     this._slice.attr("d", this._arc);
   },
 
+  _onSelectPublisher: function(publisher) {
+    this._selectedPublisher=publisher;
+    this._onHighlightPublisher(publisher);
+  },
+
   _onMouseOver: function(slice) {
     this._app.sendMessage("highlightPublisher", slice.data);
   },
 
+  _onClick: function(slice) {
+    this._app.sendMessage("selectPublisher", slice.data);
+  },
+  
   _onMouseOut: function() {
     this._app.sendMessage("highlightPublisher", null);
   }
