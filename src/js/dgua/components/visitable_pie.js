@@ -49,6 +49,7 @@ VisitablePie.prototype = {
       .style("stroke", this._backgroundColor)
       .style("stroke-width", 1)
       .attr("d", this._arc)
+      .attr("class", "clickable")
       .on("mouseover", bind(this, this._onMouseOver))
       .on("mouseout", bind(this, this._onMouseOut))
       .on("mousedown", bind(this, this._onClick));
