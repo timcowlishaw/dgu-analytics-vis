@@ -25,7 +25,7 @@ Publisher.prototype = {
   },
 
   views: function() {
-    return this._data["Views"]; 
+    return parseInt(this._data["Views"]); 
   },
 
   datasets : function() {
