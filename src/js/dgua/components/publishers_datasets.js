@@ -37,10 +37,10 @@ PublishersDatasets.prototype = {
       this._repo.getTotalPublisherVisits()
     );
 
-    var topDatasets = withOtherPublisher(withVisitProportions(
+    var topDatasets = withVisitProportions(withOtherPublisher(
       this._topN(this._repo.getDatasetsByVisits()),
-      this._repo.getTotalDatasetVisits()
-    ), this._topPublishers, this._otherPublisher);
+      this._topPublishers, this._otherPublisher
+    ), this._repo.getTotalDatasetVisits());
 
     this._publisherColorKey = new ColorKey(_.map(publishers, function(p) { return p.id(); }));
     

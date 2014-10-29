@@ -1,6 +1,7 @@
 "use strict";
 
 var _ = require("underscore");
+var withVisitProportions = require("../util/with_visit_proportions");
 
 var OtherPublisher = function(publishers) {
   this._publishers = publishers;
@@ -20,17 +21,21 @@ OtherPublisher.prototype = {
   },
 
   visits: function() {
-    var v = _.reduce(this._publishers, function(m, p) { return m + p.visits(); }, 0);
-    return v;
+    return _.reduce(this._publishers, function(m, p) { return m + p.visits(); }, 0);
   },
 
   views: function() {
-    var v = _.reduce(this._publishers, function(m, p) { return m + p.views(); }, 0);
-    return v;
+    return _.reduce(this._publishers, function(m, p) { return m + p.views(); }, 0);
   },
 
   datasets: function() {
-    return _.flatten(_.map(this._publishers, function(p) { return p.datasets(); }));
+    return withVisitProportions( 
+      _.sortBy(
+        _.flatten(_.map(this._publishers, function(p) { return p.datasets(); })),
+        function(d) { return 0 - d.visits(); }
+      ),
+      this.visits()
+    );
   },
 
   publisher: function() {
