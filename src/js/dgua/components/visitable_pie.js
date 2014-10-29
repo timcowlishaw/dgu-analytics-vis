@@ -15,25 +15,24 @@ var VisitablePie = function(app, visitables) {
 
 VisitablePie.prototype = {
 
-  _leftMargin: 50,
-  _rightMargin: 150,
-
   _notHighlightedColor: "#ddd",
-  _backgroundColor: "#efefef",
+  _backgroundColor: "#fff",
+
+  _scale: 0.80,
 
   render: function(selector) {
     this._element = slick.find(selector);  
     
-    var width = this._element.offsetWidth - this._leftMargin - this._rightMargin;
+    var width = this._element.offsetWidth;
     dom.setAttribute(this._element, "style", "height:" + width + "px;");
     this._radius = width / 2;
     
     var svg = d3.select(this._element)
       .append("svg") 
-      .attr("width", width + this._leftMargin + this._rightMargin)
+      .attr("width", width)
       .attr("height", width)
       .append("g")
-        .attr("transform", "translate("+ (width / 2 + this._leftMargin) + "," + width / 2 + ")");
+        .attr("transform", "translate(" + width / 2 + "," + width / 2 + ") scale(" + this._scale + ")");
     
     this._layout = d3.layout.pie()
       .sort(null)
