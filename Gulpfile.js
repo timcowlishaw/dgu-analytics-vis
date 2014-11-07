@@ -19,11 +19,21 @@ var imageDest   = destDir + "img/";
 var jsSrc       = srcDir + "js/application.js";
 var jsDest      = destDir + "js/";
 var jsDestFile  = "application.js";
-var cssSrc      = srcDir + "css/**/*.css";
+var cssSrc      = [
+  "node_modules/leaflet/dist/leaflet.css",
+  srcDir + "css/**/*.css",
+  "!" + srcDir + "css/ie.css"
+];
+var ieCssSrc    = [
+  "node_modules/leaflet/dist/leaflet.ie.css",
+  srcDir + "css/ie.css"
+];
+
 var cssDest     = destDir + "css/";
 var dataSrc     = srcDir + "data/**/*";
 var dataDest    = destDir + "data/";
 var cssDestFile = "styles.css";
+var ieCssDestFile = "ie.css";
 var watchFiles  = srcDir + "**/*";
 var watchTasks  = ["default"];
 
@@ -63,6 +73,11 @@ gulp.task("cssmin", function() {
   gulp.src(cssSrc)
     .pipe(cssmin())
     .pipe(concat(cssDestFile))
+    .pipe(gulp.dest(cssDest));
+  
+  gulp.src(ieCssSrc)
+    .pipe(cssmin())
+    .pipe(concat(ieCssDestFile))
     .pipe(gulp.dest(cssDest));
 });
 
