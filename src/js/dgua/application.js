@@ -18,9 +18,10 @@ Application.prototype = {
   init: function() {
     data.Repository.loadDataSources(this._dataPath, bind(this, function(repo) {
 
-      var publishersDatasets = new components.PublishersDatasets(this, repo);
-      
-      publishersDatasets.render(this._selector);
+      var countries = new components.Countries(this, repo);
+      countries.render(this._selector);
+      //var publishersDatasets = new components.PublishersDatasets(this, repo);
+      //publishersDatasets.render(this._selector);
     }));
   },
 

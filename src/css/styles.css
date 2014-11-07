@@ -21,6 +21,12 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
+  margin-top: 0;
+  margin-bottom: 1.5em;
+}
+
+img {
+  width: 100%;
 }
 
 .card {
@@ -30,6 +36,9 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 3px 3px 6px #ddd;
 }
 
+.pie_container {
+  margin-bottom: 4em;
+}
 
 .visitable_list li .title {
   text-transform: uppercase;
@@ -71,3 +80,24 @@ h1, h2, h3, h4, h5, h6 {
 .clickable {
   cursor: pointer;
 }
+
+.world_map_container {
+  margin-top: 3em;
+  height: 500px;
+  width: 100%;
+}
+
+.world_map_container:last-child:after {
+  content: '';
+  position: absolute;
+  box-shadow: inset 3px 3px 6px #ddd;
+  width:100%;
+  height:100%;
+  display:block;
+  pointer-events:none;
+}
+
+.leaflet-container a {
+  color: #333;
+}
+
