@@ -5,9 +5,9 @@ var bind = require("../util/bind");
 
 var Group = function(series) {
   this._series = {};
-  _.each(series, function(k) {
+  _.each(series, bind(this, function(k) {
     this.add(k, series[k]); 
-  });
+  }));
 };
 
 Group.prototype = {

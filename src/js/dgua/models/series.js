@@ -7,9 +7,9 @@ var bind = require("../util/bind");
 var Series = function(data) {
   this._index = new Heap();
   this._data = {};
-  _.each(data, function(datum) {
+  _.each(data, bind(this, function(datum) {
     this.add(datum);
-  });
+  }));
 };
 
 Series.prototype = {
@@ -22,6 +22,10 @@ Series.prototype = {
 
   at: function(time) {
     return this._data[time]; 
+  },
+
+  value: function() {
+    return this.last().value(); 
   },
 
   map: function(callback) {
@@ -62,6 +66,14 @@ Series.prototype = {
     return this.statistics()[0].first();
   },
 
+  startTime: function() {
+    return this.first().time(); 
+  },
+
+  endTime: function() {
+    return this.last().time(); 
+  },
+
   last: function() {
     return this.statistics()[this._index.size() - 1].last();
   },
@@ -76,7 +88,7 @@ Series.prototype = {
 
   merge: function(other) {
     var times = _.union(this.times(), other.times());
-    var values = _.map(times, function(time) {
+    var values = _.map(times, bind(this, function(time) {
       var a = this.at(time);
       var b = other.at(time);
       if(a && b) {
@@ -86,7 +98,7 @@ Series.prototype = {
       } else if(b) {
         return b;
       }
-    });
+    }));
     return new Series(values);
   }
 };

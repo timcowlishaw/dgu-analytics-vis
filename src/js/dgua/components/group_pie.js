@@ -26,22 +26,20 @@ GroupPie.prototype = {
       .attr("height", width)
       .append("g")
         .attr("transform", "translate(" + width / 2 + "," + this._scale * width / 2 + ") scale(" + this._scale + ")");
-    
+   
     this._layout = d3.layout.pie()
       .startAngle(1 * Math.PI)
       .endAngle(3 * Math.PI)
-      .sort(function(d) {
-        console.log(d); 
-      })
-      .value(function(d) { return d.value(); });
-    
+      .sort(null)
+      .value(function(d) { console.log(d); return d.value(); });
+   
     this._arc = d3.svg.arc()
       .outerRadius(this._radius)
       .innerRadius(0);
-   
+  
     this._slice = svg.datum(this._group.series()).selectAll("path").data(this._layout)
       .enter().append("path")
-      .style("fill", function(d) { console.log(d.value, d.data.color()); return d.data.color(); })
+      .style("fill", function(d) { console.log(d, d.data); return d.data.color(); })
       .style("stroke", this._backgroundColor)
       .style("stroke-width", 1)
       .attr("d", this._arc);
