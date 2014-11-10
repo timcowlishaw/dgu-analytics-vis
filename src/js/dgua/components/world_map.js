@@ -3,7 +3,7 @@
 var L = require("leaflet");
 var slick = require("slick");
 var bind = require("../util/bind");
-
+var colors = require("../util/colors");
 var WorldMap = function(repo, statistics) {
   this._repo = repo;
   this._statistics = statistics; 
@@ -22,7 +22,10 @@ WorldMap.prototype = {
       var country = this._repo.getCountry(name);
       if(country) {
         var radius = statistic.value() * this._maxRadius;
-        L.circleMarker([country.latitude(), country.longitude()], {radius: radius}).addTo(map);
+        L.circleMarker(
+          [country.latitude(), country.longitude()], 
+          {radius: radius, color: colors.base }
+        ).addTo(map);
       }
     }));
   }
