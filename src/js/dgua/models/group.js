@@ -15,8 +15,16 @@ Group.prototype = {
     this._series[key] = series;
   },
 
+  keys: function() {
+    return _.keys(this._series); 
+  },
+
   series: function(key) {
-    return this._series[key]; 
+    if(key) {
+      return this._series[key]; 
+    } else {
+      return _.values(this._series);
+    }
   },
 
   total: function() {

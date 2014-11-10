@@ -5,6 +5,7 @@ var d3 = require("d3-browserify");
 var dom = require("ampersand-dom");
 var bind = require("../util/bind");
 var _ = require("underscore");
+var colors = require("../util/colors");
 
 var VisitablePie = function(app, visitables) {
   this._app = app;
@@ -15,8 +16,8 @@ var VisitablePie = function(app, visitables) {
 
 VisitablePie.prototype = {
 
-  _notHighlightedColor: "#ddd",
-  _backgroundColor: "#fff",
+  _notHighlightedColor: colors.neutral,
+  _backgroundColor: colors.background,
 
   _scale: 0.80,
 

@@ -9,6 +9,8 @@ var colors = [
   "#856499", //purple
   "#56C8F9" //light blue
 ];
-colors.base = "#9bc658";
+colors.base = dguGreen;
 colors.complement = complement;
+colors.neutral = "#ddd";
+colors.background = "#fff";
 module.exports = colors;
