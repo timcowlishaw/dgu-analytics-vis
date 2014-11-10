@@ -2,11 +2,11 @@
 
 var _ = require("underscore");
 var Heap = require("heap");
+var bind = require("../util/bind");
 
 var Series = function(data) {
-  this._data = new Heap(function(a, b) {
-    return a.time() - b.time();
-  });
+  this._index = new Heap();
+  this._data = {};
   _.each(data, function(datum) {
     this.add(datum);
   });
@@ -15,15 +15,29 @@ var Series = function(data) {
 Series.prototype = {
 
   add: function(statistic) {
-    this._data.push(statistic);
+    var time = statistic.time();
+    this._data[time] = statistic;
+    this._index.push(time);
+  },
+
+  at: function(time) {
+    return this._data[time]; 
+  },
+
+  map: function(callback) {
+    return _.map(this._index.toArray(), bind(this, function(t) { return callback(this.at(t)); }));
   },
 
   statistics: function() {
-    return this._data.toArray(); 
+    return this.map(function(x) { return x; } ); 
   },
 
   values: function() {
-    return _.map(this.statistics(), function(s) { return s.value(); });
+    return this.map(function(s) { return s.value(); });
+  },
+
+  times: function() {
+    return this._index.toArray();
   },
 
   total: function() {
@@ -32,14 +46,14 @@ Series.prototype = {
 
   min: function() {
     return _.min(
-      _.map(this.statistics(), function(s) { return s.min(); }),
+      this.map(function(s) { return s.min(); }),
       function(s) { return s.value(); }
     );
   },
 
   max: function() {
     return _.max(
-      _.map(this.statistics(), function(s) { return s.max(); }),
+      this.map(function(s) { return s.max(); }),
       function(s) { return s.value(); }
     );
   },
@@ -49,7 +63,7 @@ Series.prototype = {
   },
 
   last: function() {
-    return this.statistics()[this.statistics().length - 1].last();
+    return this.statistics()[this._index.size() - 1].last();
   },
 
   length: function() {
@@ -57,11 +71,23 @@ Series.prototype = {
   },
 
   proportionally: function(max) {
-    return new Series(_.map(this.statistics(), function(s) { return s.proportionally(max); })); 
+    return new Series(this.map(function(s) { return s.proportionally(max); })); 
   },
 
   merge: function(other) {
-    //FIXME start here Tim.
+    var times = _.union(this.times(), other.times());
+    var values = _.map(times, function(time) {
+      var a = this.at(time);
+      var b = other.at(time);
+      if(a && b) {
+        return a.merge(b); 
+      } else if(a) {
+        return a; 
+      } else if(b) {
+        return b;
+      }
+    });
+    return new Series(values);
   }
 };
 
