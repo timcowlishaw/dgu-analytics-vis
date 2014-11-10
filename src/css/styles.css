@@ -82,7 +82,7 @@ img {
 }
 
 .world_map_container {
-  margin-top: 3em;
+  margin-top: 0;
   height: 500px;
   width: 100%;
 }
@@ -101,3 +101,14 @@ img {
   color: #333;
 }
 
+.home_away_pie_container {
+  margin: 3em;
+}
+
+.home_away_stats {
+  background-image:url('../img/countries_bg.gif');
+  background-repeat:no-repeat;
+  background-size:contain;
+  background-position:top;
+ 
+}
