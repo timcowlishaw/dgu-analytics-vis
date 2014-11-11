@@ -23,7 +23,7 @@ Countries.prototype = {
   render : function(selector) {
     render.toSelector(this._template, selector);
     var statistics = this._repo.getStatistic("Country");
-    var worldMap = new WorldMap(this._repo, statistics);
+    var worldMap = new WorldMap(this._repo, statistics.sqrt());
     var homeAwayStats = statistics.oneVsAll("United Kingdom");
     var homeAwayColors = new ColorKey(homeAwayStats.keys(), [colors.complement, colors.neutral]);
     homeAwayStats = homeAwayStats.map(function(series, key) {

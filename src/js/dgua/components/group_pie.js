@@ -31,7 +31,7 @@ GroupPie.prototype = {
       .startAngle(1 * Math.PI)
       .endAngle(3 * Math.PI)
       .sort(null)
-      .value(function(d) { console.log(d); return d.value(); });
+      .value(function(d) { return d.value(); });
    
     this._arc = d3.svg.arc()
       .outerRadius(this._radius)
@@ -39,7 +39,7 @@ GroupPie.prototype = {
   
     this._slice = svg.datum(this._group.series()).selectAll("path").data(this._layout)
       .enter().append("path")
-      .style("fill", function(d) { console.log(d, d.data); return d.data.color(); })
+      .style("fill", function(d) { return d.data.color(); })
       .style("stroke", this._backgroundColor)
       .style("stroke-width", 1)
       .attr("d", this._arc);

@@ -11,7 +11,7 @@ var WorldMap = function(repo, statistics) {
 
 WorldMap.prototype = {
 
-  _maxRadius: 100,
+  _maxRadius: 33,
 
   render: function(selector) {
     var element = slick.find(selector);
