@@ -11,7 +11,7 @@ Statistic.prototype = {
   },
 
   time: function() {
-    return Date.parse(this._period) / 1000; 
+    return Date.parse(this._period); 
   },
 
   value: function() {
@@ -43,8 +43,19 @@ Statistic.prototype = {
   },
 
   proportionally: function(max) {
-    var s = new Statistic(this.period(), this.value() / max);
-    return s;
+    return new Statistic(this.period(), this.value() / max);
+  },
+
+  log: function() {
+    return new Statistic(this.period(), Math.log(this.value()));
+  },
+
+  dampen: function(p) {
+    return new Statistic(this.period(), Math.pow(this.value(), p-1)  / p );
+  },
+
+  sqrt: function() {
+    return new Statistic(this.period(), Math.sqrt(this.value()));
   },
 
   merge: function(other) {

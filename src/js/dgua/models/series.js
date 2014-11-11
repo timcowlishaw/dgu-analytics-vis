@@ -86,6 +86,18 @@ Series.prototype = {
     return new Series(this.map(function(s) { return s.proportionally(max); })); 
   },
 
+  log: function() {
+    return new Series(this.map(function(s) { return s.log(); })); 
+  },
+  
+  dampen: function(p) {
+    return new Series(this.map(function(s) { return s.dampen(p); })); 
+  },
+
+  sqrt: function() {
+    return new Series(this.map(function(s) { return s.sqrt(); })); 
+  },
+
   merge: function(other) {
     var times = _.union(this.times(), other.times());
     var values = _.map(times, bind(this, function(time) {

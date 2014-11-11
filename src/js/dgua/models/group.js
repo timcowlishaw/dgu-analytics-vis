@@ -46,15 +46,11 @@ Group.prototype = {
   },
 
   first: function() {
-    return this.map(bind(this, function(s) {
-      return s.first();
-    }));
+    return this.map(function(s) { return s.first(); });
   },
 
   last: function() {
-    return this.map(bind(this, function(s) {
-      return s.last();
-    }));
+    return this.map(function(s) { return s.last(); });
   },
 
   length: function() {
@@ -64,11 +60,21 @@ Group.prototype = {
     );
   },
 
+  log: function() {
+    return this.map(function(s) {  return s.log(); }); 
+  },
+
+  dampen: function(p) {
+    return this.map(function(s) {  return s.dampen(p); }); 
+  },
+
+  sqrt: function() {
+    return this.map(function(s) {  return s.sqrt(); }); 
+  },
+  
   proportionally: function() {
     var max = this.max().value();
-    return this.map(bind(this, function(s) { 
-      return s.proportionally(max); 
-    }));
+    return this.map(function(s) { return s.proportionally(max); });
   },
 
   each: function(callback) {
@@ -76,7 +82,7 @@ Group.prototype = {
   },
 
   without: function(discard) {
-    return this.map(bind(this, function(series, key) { if(key != discard) return series; }));
+    return this.map(function(series, key) { if(key != discard) return series; });
   },
 
   oneVsAll: function(keep) {
