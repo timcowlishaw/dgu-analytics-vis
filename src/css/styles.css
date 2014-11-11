@@ -112,3 +112,15 @@ img {
   background-position:top;
  
 }
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #333;
+  shape-rendering: crispEdges;
+}
+
+.axis text {
+  fill: #333;
+  font-size: 8px;
+}
