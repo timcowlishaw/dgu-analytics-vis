@@ -6,8 +6,6 @@ var GroupPie = require("./group_pie");
 var SeriesLine = require("./series_line");
 var ColorKey = require("../util/color_key");
 var colors = require("../util/colors");
-var bind = require("../util/bind");
-var slick = require("slick");
 
 var CountrySummary = function(name, statistics) {
   this._name = name;
