@@ -133,3 +133,12 @@ img {
 .percentage_pull_quote .text {
   text-transform: uppercase;
 }
+
+.back_button {
+  margin-bottom: 1em; 
+}
+
+.back_button a {
+  font-size: 0.8em;
+  color: #999; 
+}

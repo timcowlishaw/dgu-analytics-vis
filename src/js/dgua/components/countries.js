@@ -12,6 +12,8 @@ var colors = require("../util/colors");
 var bind = require("../util/bind");
 var style = require("dom-style");
 var slick = require("slick");
+var dom = require("ampersand-dom");
+var events = require("dom-events");
 
 var Countries = function(app, repo) {
   this._app = app;
@@ -28,6 +30,7 @@ Countries.prototype = {
   _homeAwayPullquoteSelector: ".home_away_pullquote_container",
   _homeAwaySectionSelector: ".home_away",
   _countrySummarySelector: ".country_summary_container",
+  _backButtonSelector: ".back_button",
 
   render : function(selector) {
     this._selector = selector;
@@ -41,21 +44,32 @@ Countries.prototype = {
     });
     var homeAwayTimeline = new SeriesLine(homeAwayStats.series("United Kingdom"));
     var homeAwayPie = new GroupPie(homeAwayStats);
+    var awayStat = homeAwayStats.last().proportionally().series()[1].value();
+    var homeAwayPullquote = new PercentagePullQuote(awayStat, "of visits come from abroad");
     worldMap.render(selector + " " + this._worldMapSelector);
+    homeAwayPullquote.render(selector + " " + this._homeAwayPullquoteSelector);
     homeAwayPie.render(selector + " " + this._homeAwayPieSelector);
     homeAwayTimeline.render(selector + " " + this._homeAwayTimelineSelector);
   },
 
   _onCountrySelected: function(name, statistic) {
-    this._hideHomeAwaySection();
-    this._showCountrySection(name, statistic);
+    if(name) {
+      this._hideHomeAwaySection();
+      this._showBackButton();
+      this._showCountrySection(name, statistic);
+    } else {
+      this._hideCountrySection();
+      this._hideBackButton();
+      this._showHomeAwaySection(); 
+    }
   },
 
   _hideHomeAwaySection: function() {
     var homeAwaySection = slick.find(this._homeAwaySectionSelector);
+    this._homeAwaySectionHeight = homeAwaySection.offsetHeight;
     style(homeAwaySection, {
       "position": "relative",
-      "height": homeAwaySection.offsetHeight + "px",
+      "height": this._homeAwaySectionHeight + "px",
       "transition": "height 500ms, opacity 500ms" 
     });
     window.setTimeout(function() {
@@ -66,11 +80,43 @@ Countries.prototype = {
     }, 50);
   },
 
+  _showHomeAwaySection: function() {
+    var homeAwaySection = slick.find(this._homeAwaySectionSelector);
+    window.setTimeout(bind(this, function() {
+      style(homeAwaySection, {
+        "height": this._homeAwaySectionHeight + "px",
+        "opacity": "1.0"
+      });
+    }, 50));
+  },
+
   _showCountrySection: function(name) {
     var statistic = this._repo.getStatistic("Country").oneVsAll(name);
     var countrySection = new CountrySummary(name, statistic);
-   countrySection.render(this._selector + " " + this._countrySummarySelector);
-  }
+    countrySection.render(this._selector + " " + this._countrySummarySelector);
+  },
+
+  _hideCountrySection: function() {
+    var countrySectionContainer = slick.find(this._countrySummarySelector);
+    dom.text(countrySectionContainer, ""); 
+  },
+
+  _showBackButton: function() {
+    var backButtonContainer = slick.find(this._backButtonSelector);
+    var link = document.createElement("a");
+    dom.text(link, "\u00AB Back");
+    dom.setAttribute(link, "href", "#");
+    events.on(link, "click", bind(this, function(event) {
+      event.preventDefault(); 
+      this._app.sendMessage("countrySelected", null);
+    }));
+    backButtonContainer.appendChild(link);
+  },
+
+  _hideBackButton: function() {
+    var backButtonContainer = slick.find(this._backButtonSelector);
+    dom.text(backButtonContainer, "");
+  },
 };
 
 module.exports = Countries;

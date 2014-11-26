@@ -10,7 +10,8 @@ var WorldMap = function(app, repo, statistics) {
   this._app = app;
   this._repo = repo;
   this._statistics = statistics; 
-  this._markers = [];
+  this._markers = {};
+  this._app.registerMessageHandler("countrySelected", bind(this, this._onCountrySelected));
 };
 
 WorldMap.prototype = {
@@ -30,9 +31,9 @@ WorldMap.prototype = {
           [country.latitude(), country.longitude()], 
           {radius: radius, color: colors.base }
         );
-        this._markers.push(marker);
+        this._markers[name] = marker;
         marker.addEventListener("click", bind(this, function() {
-          this._onMarkerClick(marker, name, statistic);
+          this._onMarkerClick(name);
         }));
         marker.addTo(this._map);
         
@@ -40,11 +41,22 @@ WorldMap.prototype = {
     }));
   },
 
-  _onMarkerClick: function(marker, name, statistic) {
-    _.each(_.difference(this._markers, [marker]), bind(this, function(m) {
-      this._map.removeLayer(m); 
+  _onMarkerClick: function(name) {
+    this._app.sendMessage("countrySelected", name);
+  },
+
+  _onCountrySelected: function(country) {
+    this._map.eachLayer(bind(this, function(marker) {
+      if(_.contains(_.values(this._markers),marker)) this._map.removeLayer(marker); 
     }));
-    this._app.sendMessage("countrySelected", name, statistic);
+    if(country) {
+      var marker = this._markers[country];
+      this._map.addLayer(marker);
+    } else {
+      _.each(_.values(this._markers), bind(this, function(marker) {
+        this._map.addLayer(marker); 
+      }));
+    }
   },
 };
 
