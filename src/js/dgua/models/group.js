@@ -73,8 +73,8 @@ Group.prototype = {
   },
   
   proportionally: function() {
-    var max = this.max().value();
-    return this.map(function(s) { return s.proportionally(max); });
+    var total = this.total().value();
+    return this.map(function(s) { return s.proportionally(total); });
   },
 
   each: function(callback) {

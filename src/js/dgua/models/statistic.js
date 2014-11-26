@@ -42,8 +42,8 @@ Statistic.prototype = {
     return new Statistic(this.period(), 1); 
   },
 
-  proportionally: function(max) {
-    return new Statistic(this.period(), this.value() / max);
+  proportionally: function(total) {
+    return new Statistic(this.period(), this.value() / total);
   },
 
   log: function() {

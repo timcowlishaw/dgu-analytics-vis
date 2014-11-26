@@ -6,6 +6,7 @@ var WorldMap = require("./world_map");
 var GroupPie = require("./group_pie");
 var SeriesLine = require("./series_line");
 var ColorKey = require("../util/color_key");
+var PercentagePullQuote = require("./percentage_pull_quote");
 var CountrySummary = require("./country_summary");
 var colors = require("../util/colors");
 var bind = require("../util/bind");
@@ -24,6 +25,7 @@ Countries.prototype = {
   _worldMapSelector: ".world_map_container",
   _homeAwayPieSelector: ".home_away_pie_container",
   _homeAwayTimelineSelector: ".home_away_timeline_container",
+  _homeAwayPullquoteSelector: ".home_away_pullquote_container",
   _homeAwaySectionSelector: ".home_away",
   _countrySummarySelector: ".country_summary_container",
 
@@ -31,7 +33,7 @@ Countries.prototype = {
     this._selector = selector;
     render.toSelector(this._template, selector);
     var statistics = this._repo.getStatistic("Country");
-    var worldMap = new WorldMap(this._app, this._repo, statistics.sqrt());
+    var worldMap = new WorldMap(this._app, this._repo, statistics);
     var homeAwayStats = statistics.oneVsAll("United Kingdom");
     var homeAwayColors = new ColorKey(homeAwayStats.keys(), [colors.complement, colors.neutral]);
     homeAwayStats = homeAwayStats.map(function(series, key) {

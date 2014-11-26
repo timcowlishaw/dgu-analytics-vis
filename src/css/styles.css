@@ -124,3 +124,12 @@ img {
   fill: #333;
   font-size: 8px;
 }
+
+.percentage_pull_quote .figure {
+  font-weight: bold;
+  font-size: 4em;
+}
+
+.percentage_pull_quote .text {
+  text-transform: uppercase;
+}

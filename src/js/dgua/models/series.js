@@ -82,8 +82,8 @@ Series.prototype = {
     return _.reduce(this.statistics(), function(m, s) { return m.length().merge(s.length()); });
   },
 
-  proportionally: function(max) {
-    return new Series(this.map(function(s) { return s.proportionally(max); })); 
+  proportionally: function(total) {
+    return new Series(this.map(function(s) { return s.proportionally(total); })); 
   },
 
   log: function() {
