@@ -44,8 +44,8 @@ Countries.prototype = {
     });
     var homeAwayTimeline = new SeriesLine(homeAwayStats.series("United Kingdom"));
     var homeAwayPie = new GroupPie(homeAwayStats);
-    var awayStat = homeAwayStats.last().proportionally().series()[1].value();
-    var homeAwayPullquote = new PercentagePullQuote(awayStat, "of visits come from abroad");
+    var homeStat = homeAwayStats.last().proportionally().series()[0].value();
+    var homeAwayPullquote = new PercentagePullQuote(homeStat, "of visits come from the UK");
     worldMap.render(selector + " " + this._worldMapSelector);
     homeAwayPullquote.render(selector + " " + this._homeAwayPullquoteSelector);
     homeAwayPie.render(selector + " " + this._homeAwayPieSelector);
