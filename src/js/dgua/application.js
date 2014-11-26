@@ -19,9 +19,16 @@ Application.prototype = {
     data.Repository.loadDataSources(this._dataPath, bind(this, function(repo) {
 
       var countries = new components.Countries(this, repo);
-      countries.render(this._selector);
-      //var publishersDatasets = new components.PublishersDatasets(this, repo);
-      //publishersDatasets.render(this._selector);
+      var publishersDatasets = new components.PublishersDatasets(this, repo);
+      
+      var tabs = new components.TabbedNavigation(this, [
+        ["Datasets", bind(publishersDatasets, publishersDatasets.render)],
+        ["Countries", bind(countries, countries.render)],
+        ["Platforms", function() {}],
+        ["Social", function() {}] 
+      ]);
+
+      tabs.render(this._selector);
     }));
   },
 

@@ -8,5 +8,6 @@ module.exports = {
   Countries: require("./components/countries"),
   GroupPie: require("./components/group_pie"),
   SeriesLine: require("./components/series_line"),
-  PercentagePullQuote: require("./components/percentage_pull_quote")
+  PercentagePullQuote: require("./components/percentage_pull_quote"),
+  TabbedNavigation: require("./components/tabbed_navigation")
 };

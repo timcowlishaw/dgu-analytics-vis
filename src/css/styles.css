@@ -163,3 +163,56 @@ img {
   font-size: 0.8em;
   color: #999; 
 }
+
+.tabs {
+  list-style-type: none;
+  font-size: 0.8em;
+  margin:0 0.625em 0 0.625em;
+  padding: 0;
+}
+
+.tabs li {
+  height: 100%;
+  background-color: white;
+  float: left;
+  padding: 1em;
+  /* margin-right: 5px; */
+  text-transform: uppercase;
+  color: #999;
+  box-shadow: inset 0px 0px 3px #ddd;
+  cursor: pointer;
+}
+
+.tabs li.selected {
+  cursor: default;
+}
+
+.tabs li.selected, .tabs li:hover {
+  font-weight: bold;
+  border-bottom: none;
+  color: #333;
+  box-shadow: none;
+}
+
+.tabs li.clear {
+  float: none;
+  clear: left;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  visibility: hidden;
+}
+
+.tabs_buffer {
+  margin:0 0.625em 0.625em 0.625em;
+  padding: 0;
+  font-size: 0.8em;
+  border-bottom: 1em solid #fff;
+  box-shadow: 3px 3px 6px #ddd;
+}
+
+.tab_content {
+  overflow: auto; /* fix collapsing margins */
+  margin: 0;
+  padding: 0;
+}
