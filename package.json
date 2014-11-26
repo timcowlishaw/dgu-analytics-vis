@@ -26,6 +26,7 @@
     "gulp-uglify": "^1.0.1",
     "gulp-watch": "~0.6.5",
     "heap": "^0.2.5",
+    "leaflet": "^0.7.3",
     "mustache": "~0.8.2",
     "slick": "~1.12.1",
     "underscore": "~1.6.0",

@@ -5,6 +5,7 @@ var d3 = require("d3-browserify");
 var dom = require("ampersand-dom");
 var bind = require("../util/bind");
 var _ = require("underscore");
+var colors = require("../util/colors");
 
 var VisitablePie = function(app, visitables) {
   this._app = app;
@@ -15,8 +16,8 @@ var VisitablePie = function(app, visitables) {
 
 VisitablePie.prototype = {
 
-  _notHighlightedColor: "#ddd",
-  _backgroundColor: "#fff",
+  _notHighlightedColor: colors.neutral,
+  _backgroundColor: colors.background,
 
   _scale: 0.80,
 
@@ -24,7 +25,7 @@ VisitablePie.prototype = {
     this._element = slick.find(selector);  
     
     var width = this._element.offsetWidth;
-    dom.setAttribute(this._element, "style", "height:" + width + "px;");
+    dom.setAttribute(this._element, "style", "height:" + this._scale * width + "px;");
     this._radius = width / 2;
     
     var svg = d3.select(this._element)
@@ -32,7 +33,7 @@ VisitablePie.prototype = {
       .attr("width", width)
       .attr("height", width)
       .append("g")
-        .attr("transform", "translate(" + width / 2 + "," + width / 2 + ") scale(" + this._scale + ")");
+        .attr("transform", "translate(" + width / 2 + "," + this._scale * width / 2 + ") scale(" + this._scale + ")");
     
     this._layout = d3.layout.pie()
       .sort(null)

@@ -21,6 +21,12 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
+  margin-top: 0;
+  margin-bottom: 1.5em;
+}
+
+img {
+  width: 100%;
 }
 
 .card {
@@ -30,6 +36,9 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 3px 3px 6px #ddd;
 }
 
+.pie_container {
+  margin-bottom: 4em;
+}
 
 .visitable_list li .title {
   text-transform: uppercase;
@@ -70,4 +79,140 @@ h1, h2, h3, h4, h5, h6 {
 
 .clickable {
   cursor: pointer;
+}
+
+.world_map_container {
+  margin-top: 0;
+  height: 500px;
+  width: 100%;
+}
+
+.world_map_container:last-child:after {
+  content: '';
+  position: absolute;
+  box-shadow: inset 0px 0px 9px #ddd;
+  width:100%;
+  height:100%;
+  display:block;
+  pointer-events:none;
+}
+
+.leaflet-container a {
+  color: #333;
+}
+
+.uk_outline img {
+  margin-top: 4.593em;
+}
+
+.home_away_pie_container {
+  margin: 10px 3em 3em 3em;
+}
+
+.home_away_timeline_container svg {
+  margin-top: 1.6em;
+}
+
+.country_summary_container {
+  padding-top: 1em;
+}
+
+.country_summary h2 {
+  margin-top: 1em;
+  margin-bottom: 0;
+}
+
+.country_summary .time_series {
+  margin-top: 1.2em;
+}
+
+.home_away_stats {
+  background-image:url('../img/countries_bg.gif');
+  background-repeat:no-repeat;
+  background-size:contain;
+  background-position:bottom;
+ 
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #333;
+  shape-rendering: crispEdges;
+}
+
+.axis text {
+  fill: #333;
+  font-size: 8px;
+}
+
+.percentage_pull_quote .figure {
+  font-weight: bold;
+  font-size: 4em;
+}
+
+.percentage_pull_quote .text {
+  text-transform: uppercase;
+}
+
+.back_button {
+  margin-bottom: 1em; 
+}
+
+.back_button a {
+  font-size: 0.8em;
+  color: #999; 
+}
+
+.tabs {
+  list-style-type: none;
+  font-size: 0.8em;
+  margin:0 0.625em 0 0.625em;
+  padding: 0;
+}
+
+.tabs li {
+  height: 100%;
+  background-color: white;
+  float: left;
+  padding: 1em;
+  /* margin-right: 5px; */
+  text-transform: uppercase;
+  color: #999;
+  box-shadow: inset 0px 0px 3px #ddd;
+  cursor: pointer;
+}
+
+.tabs li.selected {
+  cursor: default;
+}
+
+.tabs li.selected, .tabs li:hover {
+  font-weight: bold;
+  border-bottom: none;
+  color: #333;
+  box-shadow: none;
+}
+
+.tabs li.clear {
+  float: none;
+  clear: left;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  visibility: hidden;
+}
+
+.tabs_buffer {
+  margin:0 0.625em 0.625em 0.625em;
+  padding: 0;
+  font-size: 0.8em;
+  border-bottom: 1em solid #fff;
+  box-shadow: 3px 3px 6px #ddd;
+}
+
+.tab_content {
+  overflow: auto; /* fix collapsing margins */
+  margin: 0;
+  padding: 0;
 }
