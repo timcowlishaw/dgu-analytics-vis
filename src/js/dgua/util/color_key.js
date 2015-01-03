@@ -11,8 +11,12 @@ var ColorKey = function(items, colors) {
 ColorKey.prototype = {
   withColor: function(object, item) {
     if(!item) item = object;
-    var color = this._colors[_.indexOf(this._items, item)]; 
+    var color = this.color(item);
     return decorateWith(object, {color: function() { return color; }});
+  },
+
+  color: function(item) {
+    return this._colors[_.indexOf(this._items, item)]; 
   }
 };
 

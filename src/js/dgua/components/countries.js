@@ -42,8 +42,8 @@ Countries.prototype = {
     homeAwayStats = homeAwayStats.map(function(series, key) {
       return homeAwayColors.withColor(series, key);
     });
-    var homeAwayTimeline = new SeriesLine(homeAwayStats.series("United Kingdom"));
-    var homeAwayPie = new GroupPie(homeAwayStats);
+    var homeAwayTimeline = new SeriesLine(this._app, homeAwayStats.series("United Kingdom"));
+    var homeAwayPie = new GroupPie(homeAwayStats, {rotation: 1 * Math.PI });
     var homeStat = homeAwayStats.last().proportionally().series()[0].value();
     var homeAwayPullquote = new PercentagePullQuote(homeStat, "of visits come from the UK");
     worldMap.render(selector + " " + this._worldMapSelector);
@@ -92,7 +92,7 @@ Countries.prototype = {
 
   _showCountrySection: function(name) {
     var statistic = this._repo.getStatistic("Country").oneVsAll(name);
-    var countrySection = new CountrySummary(name, statistic);
+    var countrySection = new CountrySummary(this._app, name, statistic);
     countrySection.render(this._selector + " " + this._countrySummarySelector);
   },
 
