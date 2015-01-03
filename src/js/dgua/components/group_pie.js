@@ -3,9 +3,12 @@
 var slick = require("slick");
 var d3 = require("d3-browserify");
 var dom = require("ampersand-dom");
+var colors = require("../util/colors");
 
-var GroupPie = function(group) {
+var GroupPie = function(group, opts) {
+  if(!opts) opts = {};
   this._group = group;
+  this._rotation = opts.rotation || 0;
 };
 
 GroupPie.prototype = {
@@ -15,7 +18,6 @@ GroupPie.prototype = {
 
   render: function(selector) {
     this._element = slick.find(selector);
-    
     var width = this._element.offsetWidth;
     dom.setAttribute(this._element, "style", "height:" + this._scale * width + "px;");
     this._radius = width / 2;
@@ -28,8 +30,8 @@ GroupPie.prototype = {
         .attr("transform", "translate(" + width / 2 + "," + this._scale * width / 2 + ") scale(" + this._scale + ")");
    
     this._layout = d3.layout.pie()
-      .startAngle(1 * Math.PI)
-      .endAngle(3 * Math.PI)
+      .startAngle(this._rotation)
+      .endAngle(2 * Math.PI + this._rotation)
       .sort(null)
       .value(function(d) { return d.value(); });
    
@@ -39,7 +41,7 @@ GroupPie.prototype = {
   
     this._slice = svg.datum(this._group.series()).selectAll("path").data(this._layout)
       .enter().append("path")
-      .style("fill", function(d) { return d.data.color(); })
+      .style("fill", function(d) { return d.data.color ? d.data.color() : colors.neutral; })
       .style("stroke", this._backgroundColor)
       .style("stroke-width", 1)
       .attr("d", this._arc);

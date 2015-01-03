@@ -1,5 +1,7 @@
 "use strict";
 
+var Group = require("./group");
+
 var Statistic = function(period, value) {
   this._period = period;
   this._value = value;
@@ -60,6 +62,13 @@ Statistic.prototype = {
 
   merge: function(other) {
     return new Statistic(this.period(), this.value() + other.value());
+  },
+
+  toProportionalGroup: function(total, seriesName, otherSeriesName) {
+    var g = new Group();
+    g.add(seriesName, this);
+    g.add(otherSeriesName || "Others", new Statistic(this.period(), total - this.value()));
+    return g;
   }
 };
 

@@ -1,4 +1,4 @@
-html {
+hthis._statistics.series(pair[0])tml {
   font-family: "Helvetica Neue", "Helvetica", "Verdana", sans-serif;
 }
 
@@ -36,7 +36,17 @@ img {
   box-shadow: 3px 3px 6px #ddd;
 }
 
-.pie_container {
+.hover {
+  position: absolute;
+  background-color: white;
+  padding: 1em;
+  margin: 0.5em;
+  box-shadow: 3px 3px 6px #ddd;
+  z-index: 9999;
+  border: 1px solid #ddd;
+}
+
+.publishers .pie_container {
   margin-bottom: 4em;
 }
 
@@ -155,6 +165,15 @@ img {
   text-transform: uppercase;
 }
 
+.number_pull_quote .figure {
+  font-weight: bold;
+  font-size: 4em;
+}
+
+.number_pull_quote .text, .number_pull_quote .pre_text {
+  text-transform: uppercase;
+}
+
 .back_button {
   margin-bottom: 1em; 
 }
@@ -212,7 +231,72 @@ img {
 }
 
 .tab_content {
-  overflow: auto; /* fix collapsing margins */
   margin: 0;
   padding: 0;
 }
+
+.group_key_with_percentage table {
+  width: 100%;
+}
+
+
+.group_key_with_percentage tr td {
+  padding-bottom: 0.5em;
+}
+
+.group_key_with_percentage tr.with_chip td {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.group_key_with_percentage .name {
+  font-weight: bold;
+  padding-left: 0.5em;
+}
+
+.group_key_with_percentage .percentage {
+  text-align: right;
+  vertical-align: top;
+} 
+
+.group_key_with_percentage .chip {
+  width: 1em;
+  margin-right: 0.5em;
+  border-bottom: 1px solid white;
+}
+
+
+.most_shared_datasets_container .key_container {
+  position: relative;
+}
+
+.most_shared_datasets_container .group_key_with_percentage {
+  position: absolute;
+  bottom: 0;
+}
+
+.top_traffic_sources_container .key_container {
+  position: relative;
+}
+
+.top_traffic_sources_container .group_key_with_percentage {
+  position: absolute;
+  top: 0;
+  bottom:0;
+  left: 0;
+  right: 0;
+  margin: 10%;
+}
+
+.social_month_summary .sources {
+  margin-bottom: 1em; 
+}
+
+.social_month_summary .pie_wrapper {
+  margin-bottom: 2em; 
+}
+
+.social_month_summary .percentage_pull_quote .figure {
+  font-size: 3em;
+}
+

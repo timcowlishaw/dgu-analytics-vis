@@ -27,6 +27,10 @@ Group.prototype = {
     }
   },
 
+  size: function() {
+    return _.size(this._series); 
+  },
+
   total: function() {
     return _.reduce(this._series, function(m, s) {  return m.total().merge(s.total()); });
   },
@@ -84,7 +88,7 @@ Group.prototype = {
   without: function(discard) {
     return this.map(function(series, key) { if(key != discard) return series; });
   },
-
+  
   oneVsAll: function(keep) {
     var keepSeries = this._series[keep];
     var series = _.omit(this._series, keep);
@@ -97,14 +101,43 @@ Group.prototype = {
     return group;
   },
 
+  topN: function(n, withOthers) {
+    var keepSeries = _.first(_.sortBy(_.keys(this._series), bind(this, function(s) {
+      return -this._series[s].value();
+    })), n);
+    var group = new Group();
+    _.each(keepSeries, bind(this, function(name) {  group.add(name, this._series[name]); }));
+    if(withOthers) {
+      var otherSeries = _.difference(this._series, _.map(keepSeries, bind(this, function(name) {
+        return this._series[name];
+      })));
+      var others = _.reduce(otherSeries, function(a, b) {
+        return a.merge(b);
+      });
+      group.add("Others", others);
+    }
+    return group;
+  },
+
   map: function(callback) {
     return _.reduce(_.keys(this._series), bind(this, function(g, k) {
       var s = callback(this._series[k], k);
       if(s) g.add(k, s);
       return g;
     }), new Group());
-  }
+  },
 
+  sum: function() {
+    return _.reduce(this.series(), function(a, b) {
+      return a.merge(b);
+    });
+  },
+
+  at: function(date) {
+    return this.map(function(series) {
+      return series.at(date);
+    });
+  }
 };
 
 module.exports = Group;

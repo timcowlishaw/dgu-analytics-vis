@@ -1,0 +1,14 @@
+<div class="group_key_with_percentage">
+  <table>
+    {{#series}}
+      
+    <tr class="series {{className}}">
+        {{#color}}
+          <td class="chip" style="background-color: {{color}}"></td>
+        {{/color}}
+        <td class="name">{{name}}</td>
+        <td class="percentage">{{percentage}}</td>
+      </tr>
+    {{/series}}
+  </table>
+</div>

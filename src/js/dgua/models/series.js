@@ -1,11 +1,9 @@
 "use strict";
 
 var _ = require("underscore");
-var Heap = require("heap");
 var bind = require("../util/bind");
 
 var Series = function(data) {
-  this._index = new Heap();
   this._data = {};
   _.each(data, bind(this, function(datum) {
     this.add(datum);
@@ -17,7 +15,6 @@ Series.prototype = {
   add: function(statistic) {
     var time = statistic.time();
     this._data[time] = statistic;
-    this._index.push(time);
   },
 
   at: function(time) {
@@ -29,19 +26,30 @@ Series.prototype = {
   },
 
   map: function(callback) {
-    return _.map(this._index.toArray(), bind(this, function(t) { return callback(this.at(t)); }));
+    return _.map(this.times(), bind(this, function(t) { return callback(this.at(t)); }));
   },
 
   statistics: function() {
     return this.map(function(x) { return x; } ); 
   },
 
+  closestStat: function(time)  {
+    var closestTime = _.min(this.times(), function(t) {
+      return Math.abs(time - t);
+    });
+    return this.at(closestTime);
+  },
+
   values: function() {
     return this.map(function(s) { return s.value(); });
   },
 
+  periods: function() {
+    return this.map(function(s) { return s.period(); }) ;
+  },
+
   times: function() {
-    return this._index.toArray();
+    return _.keys(this._data).sort();
   },
 
   total: function() {
@@ -75,7 +83,7 @@ Series.prototype = {
   },
 
   last: function() {
-    return this.statistics()[this._index.size() - 1].last();
+    return this.statistics()[_.size(this._data) - 1].last();
   },
 
   length: function() {
@@ -84,6 +92,15 @@ Series.prototype = {
 
   proportionally: function(total) {
     return new Series(this.map(function(s) { return s.proportionally(total); })); 
+  },
+
+  asProportionOfSeries: function(totalSeries) {
+    var values = _.map(this.times(), bind(this, function(time) {
+      var num = this.at(time);
+      var denom = totalSeries.at(time);
+      return num.proportionally(denom.value());
+    }));
+    return new Series(values);
   },
 
   log: function() {
@@ -111,7 +128,8 @@ Series.prototype = {
         return b;
       }
     }));
-    return new Series(values);
+    var s = new Series(values);
+    return s;
   }
 };
 

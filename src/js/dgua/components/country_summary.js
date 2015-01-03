@@ -9,7 +9,8 @@ var ColorKey = require("../util/color_key");
 var colors = require("../util/colors");
 var bind = require("../util/bind");
 
-var CountrySummary = function(name, statistics) {
+var CountrySummary = function(app, name, statistics) {
+  this._app = app;
   this._name = name;
   this._statistics = statistics;
 };
@@ -27,7 +28,7 @@ CountrySummary.prototype = {
     var statistics = this._statistics.map(bind(key, key.withColor));
     var last = statistics.last().map(bind(key, key.withColor));
     var series = statistics.series(this._name);
-    var timeline = new SeriesLine(series);
+    var timeline = new SeriesLine(this._app, series);
     var pie = new GroupPie(last);
     var proportion = last.proportionally().series()[0].value();
     var pullQuote = new PercentagePullQuote(proportion, "of all visits");
