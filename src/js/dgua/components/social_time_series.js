@@ -36,11 +36,13 @@ SocialTimeSeries.prototype = {
   },
 
   _highlightStat: function(stat) {
-    if(this._activeHover) this._activeHover.destroy();
-    if(stat) {
-      var content = new SocialMonthSummary(this._app, this._repo, stat);
-      this._activeHover = new HoverBox(this._app, content);
-      this._activeHover.render(this._selector, stat.x(), stat.y());
+    if(slick.find(this._selector + " " + this._lineSelector)) { // this tab is rendered;
+      if(this._activeHover) this._activeHover.destroy();
+      if(stat) {
+        var content = new SocialMonthSummary(this._app, this._repo, stat);
+        this._activeHover = new HoverBox(this._app, content);
+        this._activeHover.render(this._selector, stat.x(), stat.y());
+      }
     }
   },
 };

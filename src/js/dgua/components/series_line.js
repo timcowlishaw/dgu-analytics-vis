@@ -23,7 +23,7 @@ SeriesLine.prototype = {
     var outerWidth = this._element.offsetWidth;
     this._width = outerWidth - this._margin * 2;
     this._height = this._aspect * outerWidth - this._margin * 2;
-    dom.setAttribute(this._element, "style", "height:" + this._height + "px;");
+    dom.setAttribute(this._element, "style", "height:" + this._aspect * outerWidth + "px;");
 
     this._x = d3.time.scale()
       .range([0, this._width])
@@ -32,7 +32,7 @@ SeriesLine.prototype = {
     this._y = d3.scale.linear()
       .range([0, this._height])
       .domain([this._series.max().value(), 0]);
- 
+
     this._svg = d3.select(this._element).append("svg")
       .attr("width", this._width + 2 * this._margin)
       .attr("height", this._height + 2 * this._margin)

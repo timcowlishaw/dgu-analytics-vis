@@ -21,10 +21,11 @@ Application.prototype = {
       var countries = new components.Countries(this, repo);
       var publishersDatasets = new components.PublishersDatasets(this, repo);
       var social = new components.Social(this, repo);
+      var platforms = new components.Platforms(this, repo);
       var tabs = new components.TabbedNavigation(this, [
         ["Datasets", bind(publishersDatasets, publishersDatasets.render)],
         ["Countries", bind(countries, countries.render)],
-        ["Platforms", function() {}],
+        ["Platforms", bind(platforms, platforms.render)],
         ["Social", bind(social, social.render)] 
       ]);
 
