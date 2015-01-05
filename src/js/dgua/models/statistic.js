@@ -41,34 +41,38 @@ Statistic.prototype = {
   },
 
   length: function() {
-    return new Statistic(this.period(), 1); 
+    return this.map(function() { return 1; });
   },
 
   proportionally: function(total) {
-    return new Statistic(this.period(), this.value() / total);
+    return this.map(function(v) { return v / total; });
   },
 
   log: function() {
-    return new Statistic(this.period(), Math.log(this.value()));
+    return this.map(function(v) { return Math.log(v); });
   },
 
   dampen: function(p) {
-    return new Statistic(this.period(), Math.pow(this.value(), p-1)  / p );
+    return this.map(function(v) { return Math.pow(v, p-1)  / p; });
   },
 
   sqrt: function() {
-    return new Statistic(this.period(), Math.sqrt(this.value()));
+    return this.map(function(v) { return Math.sqrt(v); });
   },
 
   merge: function(other) {
-    return new Statistic(this.period(), this.value() + other.value());
+    return this.map(function(v) { return v + other.value(); });
   },
 
   toProportionalGroup: function(total, seriesName, otherSeriesName) {
     var g = new Group();
     g.add(seriesName, this);
-    g.add(otherSeriesName || "Others", new Statistic(this.period(), total - this.value()));
+    g.add(otherSeriesName || "Others", this.map(function(v) { return total - v; }));
     return g;
+  },
+
+  map: function(callback) {
+    return new Statistic(this.period(), callback(this.value()));
   }
 };
 

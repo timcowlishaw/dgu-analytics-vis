@@ -20,7 +20,6 @@ HoverBox.prototype = {
     style(this._element, { top: y + "px", width: this._width});
     var parentWidth = window.innerWidth;
     if(x < parentWidth / 2) {
-      console.log("left", x, parentWidth) 
       style(this._element, {left: x + "px"});
     } else {
       style(this._element, {right: (parentWidth - x) + "px"});

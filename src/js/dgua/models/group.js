@@ -88,7 +88,15 @@ Group.prototype = {
   without: function(discard) {
     return this.map(function(series, key) { if(key != discard) return series; });
   },
-  
+ 
+  merge: function(keeps) {
+    if(!keeps) keeps = _.keys(this._series);
+    var series = _.map(keeps, bind(this, function(k) { return this._series[k];}));
+    return _.reduce(series, function(a, b) {
+      return a.merge(b);
+    });
+  },
+
   oneVsAll: function(keep) {
     var keepSeries = this._series[keep];
     var series = _.omit(this._series, keep);

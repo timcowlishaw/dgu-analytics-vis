@@ -22,7 +22,7 @@ TabbedNavigation.prototype = {
   render: function(selector) {
     this._selector = selector;
     this._element = render.toSelector(this._template, selector, this._templateParams());
-    this._selectTab(3);
+    this._selectTab(2);
     this._setupClickHandlers();
   },
 

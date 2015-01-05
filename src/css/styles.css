@@ -300,3 +300,24 @@ img {
   font-size: 3em;
 }
 
+.attribution {
+  font-size: 0.6em; 
+  color: #999;
+}
+
+.attribution a {
+  color: #999;
+}
+
+.platforms .timeseries_container {
+  margin-bottom:1em;
+}
+
+.platforms .icon {
+  margin-right: 1em;
+}
+
+.platforms .icon.right {
+  margin-right: 0;
+  margin-left: 1em;
+}
