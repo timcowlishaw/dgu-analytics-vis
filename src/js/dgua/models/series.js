@@ -87,7 +87,7 @@ Series.prototype = {
   },
 
   length: function() {
-    return _.reduce(this.statistics(), function(m, s) { return m.length().merge(s.length()); });
+    return this.periods().length;
   },
 
   proportionally: function(total) {

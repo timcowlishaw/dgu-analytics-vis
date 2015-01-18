@@ -40,10 +40,6 @@ Statistic.prototype = {
     return this; 
   },
 
-  length: function() {
-    return this.map(function() { return 1; });
-  },
-
   proportionally: function(total) {
     return this.map(function(v) { return v / total; });
   },

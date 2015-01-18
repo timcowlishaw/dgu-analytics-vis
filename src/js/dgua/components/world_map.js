@@ -22,7 +22,10 @@ WorldMap.prototype = {
     var element = slick.find(selector);
     this._map = L.map(element, { attributionControl: false }); 
     this._map.setView([23, 18], 2);
-    L.tileLayer('https://{s}.tiles.mapbox.com/v3/timcowlishaw.1aefef48/{z}/{x}/{y}.png').addTo(this._map); 
+    L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+	    attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
+	    maxZoom: 16
+    }).addTo(this._map);
     this._statistics.last().without("United Kingdom").proportionally().sqrt().each(bind(this, function(name, statistic) {
       var country = this._repo.getCountry(name);
       if(country) {
