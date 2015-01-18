@@ -12,17 +12,18 @@ var SeriesLine = function(app, series, opts) {
   this._aspect = opts.aspect || 1/10;
   this._points = opts.points;
   this._mouseOver = opts.mouseOver;
+  this._yScale = opts.yScale;
 };
 
 SeriesLine.prototype = {
-
-  _margin: 16,
+  _hMargin: 32,
+  _vMargin: 16,
 
   render: function(selector) {
     this._element = slick.find(selector);
     var outerWidth = this._element.offsetWidth;
-    this._width = outerWidth - this._margin * 2;
-    this._height = this._aspect * outerWidth - this._margin * 2;
+    this._width = outerWidth - this._hMargin * 2;
+    this._height = this._aspect * outerWidth - this._vMargin * 2;
     dom.setAttribute(this._element, "style", "height:" + this._aspect * outerWidth + "px;");
 
     this._x = d3.time.scale()
@@ -34,10 +35,10 @@ SeriesLine.prototype = {
       .domain([this._series.max().value(), 0]);
 
     this._svg = d3.select(this._element).append("svg")
-      .attr("width", this._width + 2 * this._margin)
-      .attr("height", this._height + 2 * this._margin)
+      .attr("width", this._width + 2 * this._hMargin)
+      .attr("height", this._height + 2 * this._vMargin)
       .append("g")
-      .attr("transform", "translate(" + this._margin + "," + this._margin + ")");
+      .attr("transform", "translate(" + this._hMargin + "," + this._vMargin + ")");
 
     this._container = this._svg.append("g");
 
@@ -54,9 +55,13 @@ SeriesLine.prototype = {
 
     var yAxis = d3.svg.axis()
       .scale(this._y)
-      .ticks(0)
-      .tickSize(0)
       .orient("left");
+
+    if(this._yScale) {
+      yAxis.ticks(4).tickFormat(d3.format(".0%"));
+    } else {
+      yAxis.ticks(0).tickSize(0);
+    }
     
     this._svg.append("g")
       .attr("class", "x axis")
@@ -116,8 +121,8 @@ SeriesLine.prototype = {
     var time = this._x.invert(x);
     var stat = this._series.closestStat(time);
     stat = decorateWith(stat, {
-      x: bind(this, function() { return this._element.offsetLeft + this._margin + this._x(stat.time()); }), 
-      y: bind(this, function() { return this._element.offsetTop + this._margin + this._y(stat.value()); })
+      x: bind(this, function() { return this._element.offsetLeft + this._hMargin + this._x(stat.time()); }), 
+      y: bind(this, function() { return this._element.offsetTop + this._vMargin + this._y(stat.value()); })
     });
     this._renderHighlight(stat);
     this._app.sendMessage("statisticHighlighted", stat);

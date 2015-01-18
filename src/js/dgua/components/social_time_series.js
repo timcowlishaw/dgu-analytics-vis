@@ -31,7 +31,7 @@ SocialTimeSeries.prototype = {
     style(element, {
       "height": height + "px"
     });
-    var line = new SeriesLine(this._app, this._series, {aspect : this._aspect, points: true, mouseOver: true});
+    var line = new SeriesLine(this._app, this._series, {aspect : this._aspect, points: true, mouseOver: true, yScale: true});
     line.render(selector + " " + this._lineSelector); 
   },
 

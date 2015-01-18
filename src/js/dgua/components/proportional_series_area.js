@@ -15,13 +15,14 @@ var ProportionalSeriesArea = function(app, series, opts) {
 
 ProportionalSeriesArea.prototype = {
 
-  _margin: 16,
+  _vMargin: 16,
+  _hMargin: 32,
 
   render: function(selector) {
     this._element = slick.find(selector);
     var outerWidth = this._element.offsetWidth;
-    this._width = outerWidth - this._margin * 2;
-    this._height = this._aspect * outerWidth - this._margin * 2;
+    this._width = outerWidth - this._hMargin * 2;
+    this._height = this._aspect * outerWidth - this._vMargin * 2;
     dom.setAttribute(this._element, "style", "height:" + this._aspect * outerWidth + "px;");
     
     this._x = d3.scale.ordinal()
@@ -36,11 +37,15 @@ ProportionalSeriesArea.prototype = {
       .range([0, this._height])
       .domain([0, 1]);
 
+    this._axisY = d3.scale.linear()
+      .range([0, this._height])
+      .domain([1, 0]);
+
     this._svg = d3.select(this._element).append("svg")
-      .attr("width", this._width + 2 * this._margin)
-      .attr("height", this._height + 2 * this._margin)
+      .attr("width", this._width + 2 * this._hMargin)
+      .attr("height", this._height + 2 * this._vMargin)
       .append("g")
-      .attr("transform", "translate(" + this._margin + "," + this._margin + ")");
+      .attr("transform", "translate(" + this._hMargin + "," + this._vMargin + ")");
 
     this._container = this._svg.append("g");
 
@@ -54,10 +59,10 @@ ProportionalSeriesArea.prototype = {
       .tickSize(4);
 
     var yAxis = d3.svg.axis()
-      .scale(this._y)
-      .ticks(0)
-      .tickSize(0)
-      .orient("left");
+      .scale(this._axisY)
+      .ticks(5)
+      .orient("left")
+      .tickFormat(d3.format(".0%"));
     
     this._svg.append("g")
       .attr("class", "x axis")
