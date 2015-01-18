@@ -4,7 +4,7 @@ var fs = require("fs");
 var render = require("../util/render");
 var colors = require("../util/colors");
 var decorateWith = require("../util/decorate_with");
-var SeriesLine = require("./series_line");
+var ProportionalSeriesArea = require("./proportional_series_area");
 var PercentagePullQuote = require("./percentage_pull_quote");
 var dom = require("ampersand-dom");
 var slick = require("slick");
@@ -34,8 +34,8 @@ Platforms.prototype = {
       color: function() { return colors[4]; } 
     });
   
-    var seriesLine = new SeriesLine(this._application, devicesSplit, {aspect : this._aspect, points: true, mouseOver: true });
-    seriesLine.render(selector + " " + this._lineSelector);
+    var seriesArea = new ProportionalSeriesArea(this._application, devicesSplit, {aspect : this._aspect, complementColor: colors[5], notHighlightedColor: colors.neutral });
+    seriesArea.render(selector + " " + this._lineSelector);
  
     this._defaultStat = devicesSplit.last();
     this._renderQuotes();
