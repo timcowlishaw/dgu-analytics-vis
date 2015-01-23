@@ -54,7 +54,15 @@ PublishersDatasets.prototype = {
 
     this._datasetsColumn = new VisitableList(this._app, topDatasets);
     
-    var publishersList = new VisitableList(this._app, publishers);
+    var publishersList = new VisitableList(this._app, publishers, {
+      links: false,
+      onClick: bind(this, function(visitable) {
+        this._app.sendMessage("selectPublisher", visitable.publisher());
+      }),
+      onHover: bind(this, function(visitable) {
+        this._app.sendMessage("highlightPublisher", visitable.publisher());
+      }) 
+    });
     var publishersPie = new VisitablePie(this._app, publishers);
     this._publishersColumn = new PublishersColumn(this._app, publishersPie, publishersList); 
 

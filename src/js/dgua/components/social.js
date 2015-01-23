@@ -36,7 +36,7 @@ Social.prototype = {
     var topSources = new TopTrafficSources(this._app, sourceStatistics.topN(this._topN, true));
     topSources.render(selector + " " + this._topSourcesSelector);
     
-    var mostShared = new MostShared(this._app, mostReferred);
+    var mostShared = new MostShared(this._app, this._repo, mostReferred);
     mostShared.render(selector + " " + this._mostReferredSelector);
     
     var pullQuote = new PercentagePullQuote(sharedProportion.last().value(), "of visits in the last month come from links on social media. That's: ");

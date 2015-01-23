@@ -1,6 +1,7 @@
 "use strict";
 
 var fs = require("fs");
+var bind = require("../util/bind");
 var render = require("../util/render");
 var colors = require("../util/colors");
 var decorateWith = require("../util/decorate_with");
@@ -42,7 +43,9 @@ SocialMonthSummary.prototype = {
     var sources = new GroupKeyWithPercentage(socialStats.topN(this._topN));
     sources.render(selector + " " + ".sources");
 
-    var datasets = new GroupKeyWithPercentage(sharedDatasets.topN(this._topN));
+    var datasets = new GroupKeyWithPercentage(sharedDatasets.topN(this._topN), {
+      legend: bind(this, function(name) { return this._repo.getDatasetById(name).title(); })
+    });
     datasets.render(selector + " " + ".datasets");
   },
 

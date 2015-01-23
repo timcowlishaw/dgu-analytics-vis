@@ -18,6 +18,10 @@ Dataset.prototype = {
     return this.publisher().title(); 
   },
 
+  url: function() {
+    return "/dataset/" + this.id(); 
+  },
+
   visits: function() {
     return parseInt(this._data["Visits"]); 
   },

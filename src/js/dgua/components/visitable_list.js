@@ -8,10 +8,15 @@ var slick = require("slick");
 var _ = require("underscore");
 var events = require("dom-events");
 
-var VisitableList = function(app, visitables) {
+var VisitableList = function(app, visitables, options) {
+  if(!options) options = {};
   this._app = app;
   this._visitables = visitables;
+  this._links = options.links === undefined ? true : options.links;
+  this._onClick = options.onClick;
+  this._onHover = options.onHover;
   this._app.registerMessageHandler("highlightPublisher", bind(this, this._onHighlightPublisher));
+
 };
 
 VisitableList.prototype = {
@@ -31,13 +36,15 @@ VisitableList.prototype = {
     _.each(this._visitables, bind(this, function(visitable) {
       var child = render.toNode(this._itemTemplate, this._templateParameters(visitable));
       this._element.appendChild(child);
-      events.on(child, "mouseover", bind(this, function() { this._onHover(visitable); }));
-      events.on(child, "click", bind(this, function(event) { event.preventDefault(); this._onClick(visitable); }));
+      if(this._onHover) events.on(child, "mouseover", bind(this, function() { this._onHover(visitable); }));
+      if(this._onClick) events.on(child, "click", bind(this, function(event) { event.preventDefault(); this._onClick(visitable); }));
     }));
   },
 
   _templateParameters: function(item) {
+    console.log(item);
     return {
+      url: this._links && item.url(),
       title: item.title(),
       subtitle: item.subtitle(),
       visits_proportion: (item.visitsProportion() * 100).toFixed(1) + "%",
@@ -51,15 +58,6 @@ VisitableList.prototype = {
   update: function(visitables) {
     this._visitables = visitables;
     this._renderVisitables();
-  },
-
-  //FIXME this is publisher-specific, not for all visitables. extract.
-  _onClick: function(visitable) {
-    this._app.sendMessage("selectPublisher", visitable.publisher());
-  },
-
-  _onHover: function(visitable) {
-    this._app.sendMessage("highlightPublisher", visitable.publisher());
   },
 
   _onHighlightPublisher: function(publisher) {

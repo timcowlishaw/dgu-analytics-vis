@@ -1,6 +1,11 @@
 <li style="border-left-color: {{color}};" class="publisher-{{publisher_id}} visitable clickable">
   <div class="title">
-    {{title}}
+    {{#url}}
+      <a href="{{url}}">{{title}}</a>
+    {{/url}}
+    {{^url}}
+      {{title}}
+    {{/url}}
   </div>
   <div class="subtitle">
     {{subtitle}}

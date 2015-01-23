@@ -101,7 +101,7 @@ Repository.prototype = {
       group = this._referredDatasetsByPeriod[referredDataset["Period Name"]] = new models.Group(); 
     }
     var stat = new models.Statistic(referredDataset["Period Name"], referredDataset["Referred Visits"]);
-    group.add(referredDataset["Dataset Title"], stat);
+    group.add(referredDataset["Dataset Name"], stat);
   },
 
   _loadMapping: function(mapping) {

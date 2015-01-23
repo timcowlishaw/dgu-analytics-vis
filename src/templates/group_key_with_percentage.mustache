@@ -6,7 +6,14 @@
         {{#color}}
           <td class="chip" style="background-color: {{color}}"></td>
         {{/color}}
-        <td class="name">{{name}}</td>
+        <td class="name">
+          {{#url}}
+            <a href="{{url}}">{{name}}</a>
+          {{/url}}
+          {{^url}}
+            {{name}}
+          {{/url}}
+        </td>
         <td class="percentage">{{percentage}}</td>
       </tr>
     {{/series}}

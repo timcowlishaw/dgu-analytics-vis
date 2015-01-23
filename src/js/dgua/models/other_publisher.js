@@ -20,6 +20,10 @@ OtherPublisher.prototype = {
     return ""; 
   },
 
+  url: function() {
+    return undefined; 
+  },
+
   visits: function() {
     return _.reduce(this._publishers, function(m, p) { return m + p.visits(); }, 0);
   },
