@@ -19,7 +19,7 @@ Dataset.prototype = {
   },
 
   url: function() {
-    return "/dataset/" + this.id(); 
+    return "http://data.gov.uk/dataset/" + this.id(); 
   },
 
   visits: function() {

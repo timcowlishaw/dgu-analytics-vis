@@ -11,5 +11,6 @@ module.exports = {
   PercentagePullQuote: require("./components/percentage_pull_quote"),
   TabbedNavigation: require("./components/tabbed_navigation"),
   Social: require("./components/social"),
-  Platforms: require("./components/platforms")
+  Platforms: require("./components/platforms"),
+  Dashboard: require("./components/dashboard")
 };

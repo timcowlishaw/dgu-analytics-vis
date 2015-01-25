@@ -68,6 +68,12 @@ img {
 
 }
 
+.visitable_list > li.no_color {
+  border-left: none;
+  padding-left: 0;
+
+}
+
 .visitable_list .stats {
   list-style-type: none;
   padding: 0;
@@ -112,7 +118,7 @@ img {
 }
 
 .uk_outline img {
-  margin-top: 4.593em;
+  margin-top: 3.741em;
 }
 
 .home_away_pie_container {
@@ -320,4 +326,35 @@ img {
 .platforms .icon.right {
   margin-right: 0;
   margin-left: 1em;
+}
+
+.dashboard .card {
+  position: relative;
+}
+
+.dashboard .link {
+  position: absolute;
+  font-size: 0.8em;
+  color: #999;
+  text-align: right;
+  bottom: 1em;
+  right: 1em;
+}
+
+.dashboard .countries_container {
+  width: 100%;
+  height: 410px;
+  margin-bottom: 1em;
+}
+
+.dashboard .platforms_key_container {
+  margin: 0 auto;
+  margin-top: 1em;
+  width: 33%;
+}
+
+.dashboard .social_key_container  {
+  margin: 0 auto;
+  margin-top: 1em;
+  width: 50%;
 }

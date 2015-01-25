@@ -98,14 +98,22 @@ Group.prototype = {
   },
 
   oneVsAll: function(keep) {
-    var keepSeries = this._series[keep];
-    var series = _.omit(this._series, keep);
-    var othersSeries = _.reduce(series, function(a, b) {
+    return this.partition([keep], keep, "Others"); 
+  },
+
+  partition: function(keeps, keepName, othersName) {
+    var others = _.difference(this.keys(), keeps);
+    var keepSeries = _.map(keeps, bind(this, function(k) { return this.series(k); }));
+    var keepMerged = _.reduce(keepSeries, function(a, b) {
+      return a.merge(b);
+    });
+    var othersSeries = _.map(others, bind(this, function(k) { return this.series(k); }));
+    var othersMerged = _.reduce(othersSeries, function(a, b) {
       return a.merge(b);
     });
     var group = new Group();
-    group.add(keep, keepSeries);
-    group.add("Others", othersSeries); 
+    group.add(keepName, keepMerged);
+    group.add(othersName, othersMerged); 
     return group;
   },
 

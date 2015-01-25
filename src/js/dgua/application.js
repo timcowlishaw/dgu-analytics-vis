@@ -17,12 +17,13 @@ Application.prototype = {
 
   init: function() {
     data.Repository.loadDataSources(this._dataPath, bind(this, function(repo) {
-
+      var dashboard = new components.Dashboard(this, repo);
       var countries = new components.Countries(this, repo);
       var publishersDatasets = new components.PublishersDatasets(this, repo);
       var social = new components.Social(this, repo);
       var platforms = new components.Platforms(this, repo);
       var tabs = new components.TabbedNavigation(this, [
+        ["Overview", bind(dashboard, dashboard.render)],
         ["Datasets", bind(publishersDatasets, publishersDatasets.render)],
         ["Countries", bind(countries, countries.render)],
         ["Platforms", bind(platforms, platforms.render)],
@@ -30,6 +31,9 @@ Application.prototype = {
       ]);
 
       tabs.render(this._selector);
+      this.registerMessageHandler("switchTab", function(tab) {
+        tabs.select(tab);
+      });
     }));
   },
 

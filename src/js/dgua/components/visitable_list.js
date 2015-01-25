@@ -13,6 +13,7 @@ var VisitableList = function(app, visitables, options) {
   this._app = app;
   this._visitables = visitables;
   this._links = options.links === undefined ? true : options.links;
+  this._showColor = options.color === undefined ? true : options.color;
   this._onClick = options.onClick;
   this._onHover = options.onHover;
   this._app.registerMessageHandler("highlightPublisher", bind(this, this._onHighlightPublisher));
@@ -42,7 +43,6 @@ VisitableList.prototype = {
   },
 
   _templateParameters: function(item) {
-    console.log(item);
     return {
       url: this._links && item.url(),
       title: item.title(),
@@ -50,7 +50,8 @@ VisitableList.prototype = {
       visits_proportion: (item.visitsProportion() * 100).toFixed(1) + "%",
       visits: item.visits(),
       views: item.views(),
-      color: item.color(),
+      class_name: this._showColor || "no_color",
+      color: item.color && item.color(),
       publisher_id: item.publisher().id()
     }; 
   },

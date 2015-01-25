@@ -6,11 +6,13 @@ var bind = require("../util/bind");
 var colors = require("../util/colors");
 var _ = require("underscore");
 
-var WorldMap = function(app, repo, statistics) {
+var WorldMap = function(app, repo, statistics, options) {
+  if(options === undefined) options = {};
   this._app = app;
   this._repo = repo;
   this._statistics = statistics; 
   this._markers = {};
+  this._withoutUK = options.withoutUK === undefined ? true : options.withoutUK;
   this._app.registerMessageHandler("countrySelected", bind(this, this._onCountrySelected));
 };
 
@@ -26,7 +28,10 @@ WorldMap.prototype = {
 	    attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
 	    maxZoom: 16
     }).addTo(this._map);
-    this._statistics.last().without("United Kingdom").proportionally().sqrt().each(bind(this, function(name, statistic) {
+    if(this._withoutUK) {
+      this._statistics = this._statistics.without("United Kingdom"); 
+    }
+    this._statistics.last().proportionally().sqrt().each(bind(this, function(name, statistic) {
       var country = this._repo.getCountry(name);
       if(country) {
         var radius = statistic.value() * this._maxRadius;

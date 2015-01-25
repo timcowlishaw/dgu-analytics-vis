@@ -22,7 +22,7 @@ Series.prototype = {
   },
 
   value: function() {
-    return this.last().value(); 
+    return this.total().value(); 
   },
 
   map: function(callback) {
@@ -57,13 +57,21 @@ Series.prototype = {
   },
 
   min: function() {
+    return this.total().min(); 
+  },
+
+  max: function() {
+    return this.total().max(); 
+  },
+
+  minOfSeries: function() {
     return _.min(
       this.map(function(s) { return s.min(); }),
       function(s) { return s.value(); }
     );
   },
 
-  max: function() {
+  maxOfSeries: function() {
     return _.max(
       this.map(function(s) { return s.max(); }),
       function(s) { return s.value(); }
