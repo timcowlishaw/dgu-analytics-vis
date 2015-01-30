@@ -28,7 +28,9 @@ HoverBox.prototype = {
   },
 
   destroy: function() {
-    this._element.remove();   
+    if(this._element.parentNode) {
+      this._element.parentNode.removeChild(this._element);    
+    }
   },
 };
 

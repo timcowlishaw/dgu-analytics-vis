@@ -1,0 +1,234 @@
+
+  
+
+  
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--[if IE 8 ]>    <html class="no-js ie8" lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://genshi.edgewall.org/i18n"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+    > <![endif]--><!--[if (gte IE 9)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+
+
+
+  <!-- pure one-liner to avoid whitespace glitches -->
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=IE7" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Site usage | data.gov.uk</title>
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <link rel="shortcut icon" href="http://data.gov.uk/assets/img/favicon.ico" />
+      <link rel="alternate" type="application/atom+xml" title="DGU - Recent Revision History" href="http://data.gov.uk/revision/list?days=1&amp;format=atom" />
+  <link rel="stylesheet" href="http://data.gov.uk/assets/css/datagovuk.min.css?1421770740839" />
+  <link rel="stylesheet" href="http://data.gov.uk/css/dgu-ckan.min.css?1421834833137" />
+  <!-- Python-generated JS values -->
+  <script type="text/javascript">
+    CKAN = {};
+    // later use will add offsets with leading '/' so ensure no trailing slash
+    CKAN.SITE_URL = '/'.replace(/\/$/, '');
+    CKAN.SITE_URL_NO_LOCALE = '/'.replace(/\/$/, '');
+    CKAN.USER = '';
+  </script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script>
+    //<![CDATA[
+    window.jQuery || document.write('<script src="/assets/js/jquery-1.8.3.min.js"><\/script>')
+    // ]]>
+  </script>
+  <!-- Vendor scripts -->
+  <script type="text/javascript" src="http://data.gov.uk/assets/js/vendor.min.js?1421770740839"></script>
+  <!-- CKAN DGU scripts -->
+  <script type="text/javascript" src="http://data.gov.uk/assets/js/dgu-shared.min.js?1421834833137"></script>
+    <link rel="stylesheet" type="text/css" href="http://data.gov.uk/scripts/vendor/rickshaw.min.css" />
+    <script type="text/javascript" src="http://data.gov.uk/scripts/vendor/jquery.sparkline.modified.js"></script>
+    <script type="text/javascript" src="http://data.gov.uk/scripts/rickshaw_ie7_shim.js"></script>
+    <script type="text/javascript" src="http://data.gov.uk/scripts/vendor/d3.v2.js"></script>
+    <script type="text/javascript" src="http://data.gov.uk/scripts/vendor/d3.layout.min.js"></script>
+    <script type="text/javascript" src="http://data.gov.uk/scripts/vendor/rickshaw.min.js"></script>
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <!-- font-awesome ie7 shim -->
+  <!--[if IE 7]>
+    <link rel="stylesheet" media="all" href="/assets/css/font-awesome-ie7.min.css" />
+  <![endif]-->
+  <!--[if lt IE 9]>
+      <link href="/assets/css/dgu-ie7.css" rel="stylesheet" />
+  <![endif]-->
+  <!-- BEGIN ANALYTICS VISUALISATION HEAD -->
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js" type="text/javascript"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/base-min.css">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-min.css">
+
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+
+    <link href="css/styles.css" media="all" rel="stylesheet" />
+    
+    <!--[if lte IE 8]>
+      <link rel="stylesheet" href="css/ie.css" />
+    <![endif]-->
+
+    <script src="js/application.js"></script>
+  <!-- END ANALYTICS VISUALISATION HEAD -->
+</head>
+<body class="action-index              controller-controller              index              GaReport              no-sidebar              " id="">
+  <div id="blackbar" class="without-publisher">
+    <div class="container">
+      <a class="brand" href="http://data.gov.uk/" rel="home"></a>
+      <div class="chevron position2"></div>
+      <nav id="dgu-nav">
+        <div class="text-links">
+           <a href="http://data.gov.uk/" class="nav-home">Home</a>
+           <a href="http://data.gov.uk/data" class="trigger-subnav nav-data">Data</a>
+           <a href="http://data.gov.uk/apps" class="trigger-subnav nav-apps">Apps</a>
+           <a href="http://data.gov.uk/interact" class="trigger-subnav nav-interact">Interact</a>
+         </div>
+        <div class="nav-search" style="width: 200px;">
+          <form action="http://data.gov.uk/data/search" class="input-group input-group-sm">
+            <input type="text" name="q" class="form-control" placeholder="Search for data..." />
+            <span class="input-group-btn">
+              <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
+            </span>
+          </form>
+        </div>
+          <a class="nav-user btn btn-primary" href="http://data.gov.uk/user?destination=data/site-usage"><i class="icon-user"></i></a>
+      </nav>
+    </div>
+  </div>
+  <div id="greenbar">
+    <div class="container">
+      <ul class="subnav subnav-data active">
+        <li><a class="" href="http://data.gov.uk/data/search">Datasets</a></li>
+        <li><a class="" href="http://data.gov.uk/data/map-based-search">Map Search</a></li>
+        <li><a class="" href="http://data.gov.uk/data-request">Data Requests</a></li>
+        <li><a class="" href="http://data.gov.uk/publisher">Publishers</a></li>
+        <li><a class="" href="http://data.gov.uk/organogram/cabinet-office">Public Roles &amp; Salaries</a></li>
+          <li><a class="" href="http://data.gov.uk/data/openspending-report/index">Spend Reports</a></li>
+          <li><a class="active" href="demo.html">Site Analytics</a></li>
+          <li><a class="" href="http://data.gov.uk/data/report">Reports</a></li>
+        <br />
+      </ul>
+      <ul class="subnav subnav-interact">
+        <li><a class="" href="http://data.gov.uk/location">Location</a></li>
+        <li><a class="" href="http://data.gov.uk/linked-data">Linked Data</a></li>
+        <li><a href="http://data.gov.uk/blog">All Blogs</a></li>
+        <li><a href="http://data.gov.uk/forum">All Forums</a></li>
+        <li><a href="http://data.gov.uk/library">Library</a></li>
+        <li><a href="http://data.gov.uk/glossary">Open data glossary</a></li>
+        <li><a href="http://data.gov.uk/search/everything">Search content</a></li>
+      </ul>
+    </div>
+  </div>
+  <div id="pre-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <ul id="breadcrumbs">
+            <li><a href="http://data.gov.uk/"><i class="icon-home"></i></a></li>
+    <li><a href="demo.html">Site Analytics</a></li>
+    <li><a href="demo.html">Site-wide</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Flash Messages -->
+    <div class="flash-messages container">
+    </div>
+  <div id="main-content">
+    <div class="container">
+      <div class="content">
+        <div>
+    <div class="row">
+      <div class="col-sm-7 col-md-8 col-lg-9">
+          <a class="btn button btn-primary btn-sm pull-right" href="http://data.gov.uk/data/site-usage/data_all.csv"><i class="icon-download"></i>  Download as CSV</a>
+        <h1>Site Usage</h1>
+      </div>
+      <div class="col-sm-5 col-md-4 col-lg-3">
+        <div class="panel panel-default">
+          <div class="panel-heading"><strong>Jump To...</strong></div>
+          <div class="panel-body">
+            <ul>
+              <li><a href="http://data.gov.uk/data/site-usage/publisher">Publisher Usage Statistics</a></li>
+              <li><a href="http://data.gov.uk/data/site-usage/dataset">Dataset Usage Statistics</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <!-- BEGIN ANALYTICS VISUALISATION BODY --> 
+      <div id="dgu-analytics"
+        data-dgua-datasets-filename="data/datasets_all_all.csv",
+        data-dgua-publishers-filename="data/publishers_all.csv",
+        data-dgua-mapping-filename="data/datasets_publishers_mapping.csv",
+        data-dgua-stats-filename="data/stats_all.csv",
+        data-dgua-countries-filename="data/country_latlngs.csv",
+        data-dgua-referrers-filename="data/referrers.csv"
+      ></div>
+      <!-- END ANALYTICS VISUALISATION BODY -->
+    </div>
+  </div>
+      </div>
+    </div>
+  </div><!-- /main-content -->
+  <div class="footer">
+    <footer role="contentinfo" class="container">
+      <ul class="links"><li class="menu-531 first"><a href="http://data.gov.uk/faq">FAQ</a></li>
+        <li class="menu-527"><a href="http://data.gov.uk/code-conduct">Code of conduct</a></li>
+        <li class="menu-524"><a href="http://data.gov.uk/accessibility-statement">Accessibility</a></li>
+        <li class="menu-528"><a href="http://data.gov.uk/cookies-policy">Cookies policy</a></li>
+        <li class="menu-537"><a href="http://data.gov.uk/privacy">Privacy</a></li>
+        <li class="menu-536"><a href="http://data.gov.uk/moderation-policy">Moderation policy</a></li>
+        <li class="menu-520"><a href="http://data.gov.uk/contact" title="">Contact</a></li>
+        <li class="menu-538 "><a href="http://data.gov.uk/terms-and-conditions">Terms and conditions</a></li>
+        <li class="menu-538"><a href="http://data.gov.uk/about">API</a></li>
+        <li class="menu-538 last"><a href="http://data.gov.uk/about">About</a></li>
+      </ul>
+      <div class="credits">
+        <div class="credit">
+          <strong>Powered by:</strong><br />
+          <a href="http://ckan.org/" title="CKAN Version:2.2b">
+            <div id="ckan-logo" class="retina-img">
+              <img src="http://data.gov.uk/images/ckan-logo.png" alt="Powered By CKAN" />
+            </div>
+          </a>
+        </div>
+      </div>
+    </footer>
+  </div> <!-- /footer genshi -->
+    <script type="text/javascript">
+      $(function() {
+        CKAN.GA_Reports.bind_sparklines();
+        CKAN.GA_Reports.bind_sidebar();
+        CKAN.GA_Reports.bind_month_selector();
+      });
+    </script>
+  <script type="text/javascript">
+<!--//--><![CDATA[//><!--
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-10855508-1', 'auto');
+ga('send', 'pageview');
+//--><!]]>
+</script>
+</body>
+</html>
+

@@ -17,14 +17,13 @@ Application.prototype = {
 
   init: function() {
     this._element = slick.find(this._selector);
-    var ds = this._element.dataset;
     var paths = {
-      datasetsFilename: ds["dguaDatasetsFilename"],
-      publishersFilename: ds["dguaPublishersFilename"],
-      mappingFilename: ds["dguaMappingFilename"],
-      statsFilename: ds["dguaStatsFilename"],
-      countriesFilename: ds["dguaCountriesFilename"],
-      referrersFilename: ds["dguaReferrersFilename"]
+      datasetsFilename: this._element.getAttribute("data-dgua-datasets-filename"),
+      publishersFilename: this._element.getAttribute("data-dgua-publishers-filename"),
+      mappingFilename: this._element.getAttribute("data-dgua-mapping-filename"),
+      statsFilename: this._element.getAttribute("data-dgua-stats-filename"),
+      countriesFilename: this._element.getAttribute("data-dgua-countries-filename"),
+      referrersFilename: this._element.getAttribute("data-dgua-referrers-filename")
     };
 
     data.Repository.loadDataSources(paths, bind(this, function(repo) {

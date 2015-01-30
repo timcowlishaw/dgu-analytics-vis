@@ -157,7 +157,7 @@ img {
   margin-top: 1.2em;
 }
 
-.home_away_stats {
+.home_away {
   background-image:url('../img/countries_bg.gif');
   background-repeat:no-repeat;
   background-size:contain;
@@ -291,8 +291,7 @@ img {
 }
 
 .most_shared_datasets_container .group_key_with_percentage {
-  position: absolute;
-  bottom: 0;
+  position: absolute;  
 }
 
 .top_traffic_sources_container .key_container {
@@ -377,6 +376,7 @@ img {
   margin-top: 1em;
   width: 50%;
 }
+
 .horizontal_histogram .labels {
   overflow-x: hidden;
 }
@@ -388,3 +388,4 @@ img {
 .horizontal_histogram .labels.right {
   margin-left: 0.33em;
 }
+
