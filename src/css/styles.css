@@ -46,6 +46,21 @@ img {
   border: 1px solid #ddd;
 }
 
+.title_area h2 {
+ margin-bottom: 0; 
+}
+
+.title_area .back_link {
+ text-align: right;
+ line-height: 150%;
+ vertical-align: middle;
+}
+
+.title_area .back_link a {
+  font-size: 0.8em;
+  color: #999; 
+}
+
 .publishers .pie_container {
   margin-bottom: 4em;
 }
