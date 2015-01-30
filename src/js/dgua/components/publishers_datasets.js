@@ -47,7 +47,7 @@ PublishersDatasets.prototype = {
     publishers = _.map(publishers, bind(this, function(publisher) {
       return this._publisherColorKey.withColor(publisher, publisher.id());
     }));
-    
+
     topDatasets = _.map(topDatasets, bind(this, function(dataset) {
       return this._publisherColorKey.withColor(dataset, dataset.publisher().id());
     }));
@@ -73,16 +73,17 @@ PublishersDatasets.prototype = {
   },
 
   _onSelectPublisher: function(publisher) {
+    var n = publisher.title() == "Other" ? 10 : this._app.nToDisplay;
     this._datasetsColumn.update(_.map(
-      withOtherPublisher(this._topN(publisher.datasets()), this._topPublishers, this._otherPublisher),
+      withOtherPublisher(this._topN(publisher.datasets(), n), this._topPublishers, this._otherPublisher),
       bind(this, function(dataset) {
         return this._publisherColorKey.withColor(dataset, dataset.publisher().id()); 
       })
     ));
   },
 
-  _topN: function(collection) {
-    return _.first(collection, this._app.nToDisplay);
+  _topN: function(collection, n) {
+    return _.first(collection, n || this._app.nToDisplay);
   }
 };
 module.exports = PublishersDatasets;
