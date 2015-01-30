@@ -44,7 +44,7 @@ Group.prototype = {
 
   max: function() {
     return _.max(
-      _.map(this._series, function(s) { return s.max(); }),
+      _.map(this._series, function(s) {  return s.max(); }),
       function(s) { return s.value(); }
     );
   },
@@ -97,15 +97,33 @@ Group.prototype = {
     });
   },
 
+  filter: function(keeps) {
+    return this.map(function(series, key) {
+      if(_.contains(keeps, key)) return series; 
+    });
+  },
+
+  complement: function(discards) {
+    return this.filter(_.difference(this.keys(), discards));
+  },
+
   oneVsAll: function(keep) {
-    var keepSeries = this._series[keep];
-    var series = _.omit(this._series, keep);
-    var othersSeries = _.reduce(series, function(a, b) {
+    return this.partition([keep], keep, "Others"); 
+  },
+
+  partition: function(keeps, keepName, othersName) {
+    var others = _.difference(this.keys(), keeps);
+    var keepSeries = _.map(keeps, bind(this, function(k) { return this.series(k); }));
+    var keepMerged = _.reduce(keepSeries, function(a, b) {
+      return a.merge(b);
+    });
+    var othersSeries = _.map(others, bind(this, function(k) { return this.series(k); }));
+    var othersMerged = _.reduce(othersSeries, function(a, b) {
       return a.merge(b);
     });
     var group = new Group();
-    group.add(keep, keepSeries);
-    group.add("Others", othersSeries); 
+    group.add(keepName, keepMerged);
+    group.add(othersName, othersMerged); 
     return group;
   },
 

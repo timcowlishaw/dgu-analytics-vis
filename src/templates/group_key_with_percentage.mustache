@@ -6,8 +6,23 @@
         {{#color}}
           <td class="chip" style="background-color: {{color}}"></td>
         {{/color}}
-        <td class="name">{{name}}</td>
-        <td class="percentage">{{percentage}}</td>
+        <td class="name"
+          {{#rowHeight}} 
+          style="line-height: {{rowHeight}}px; margin:0 0 {{rowMargin}}px 0; padding: 0;"
+          {{/rowHeight}}
+        >
+          {{#url}}
+            <a href="{{url}}">{{name}}</a>
+          {{/url}}
+          {{^url}}
+            {{name}}
+          {{/url}}
+        </td>
+        <td class="percentage"
+          {{#rowHeight}} 
+          style="line-height: {{rowHeight}}px; margin:0 0 {{rowMargin}}px 0; padding: 0;"
+          {{/rowHeight}}
+        >{{percentage}}</td>
       </tr>
     {{/series}}
   </table>

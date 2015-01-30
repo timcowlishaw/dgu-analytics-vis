@@ -46,6 +46,21 @@ img {
   border: 1px solid #ddd;
 }
 
+.title_area h2 {
+ margin-bottom: 0; 
+}
+
+.title_area .back_link {
+ text-align: right;
+ line-height: 150%;
+ vertical-align: middle;
+}
+
+.title_area .back_link a {
+  font-size: 0.8em;
+  color: #999; 
+}
+
 .publishers .pie_container {
   margin-bottom: 4em;
 }
@@ -65,6 +80,12 @@ img {
   margin-bottom: 3em;
   border-left:1em solid #ddd;
   padding-left: 1em;
+
+}
+
+.visitable_list > li.no_color {
+  border-left: none;
+  padding-left: 0;
 
 }
 
@@ -112,7 +133,7 @@ img {
 }
 
 .uk_outline img {
-  margin-top: 4.593em;
+  margin-top: 3.741em;
 }
 
 .home_away_pie_container {
@@ -136,7 +157,7 @@ img {
   margin-top: 1.2em;
 }
 
-.home_away_stats {
+.home_away {
   background-image:url('../img/countries_bg.gif');
   background-repeat:no-repeat;
   background-size:contain;
@@ -239,7 +260,6 @@ img {
   width: 100%;
 }
 
-
 .group_key_with_percentage tr td {
   padding-bottom: 0.5em;
 }
@@ -271,8 +291,7 @@ img {
 }
 
 .most_shared_datasets_container .group_key_with_percentage {
-  position: absolute;
-  bottom: 0;
+  position: absolute;  
 }
 
 .top_traffic_sources_container .key_container {
@@ -309,6 +328,11 @@ img {
   color: #999;
 }
 
+.platforms .computers_quote_container {
+  text-align: right;
+  margin-right: 2em;
+}
+
 .platforms .timeseries_container {
   margin-bottom:1em;
 }
@@ -321,3 +345,47 @@ img {
   margin-right: 0;
   margin-left: 1em;
 }
+
+.dashboard .card {
+  position: relative;
+}
+
+.dashboard .link {
+  position: absolute;
+  font-size: 0.8em;
+  color: #999;
+  text-align: right;
+  bottom: 1em;
+  right: 1em;
+}
+
+.dashboard .countries_container {
+  width: 100%;
+  height: 410px;
+  margin-bottom: 1em;
+}
+
+.dashboard .platforms_key_container {
+  margin: 0 auto;
+  margin-top: 1em;
+  width: 33%;
+}
+
+.dashboard .social_key_container  {
+  margin: 0 auto;
+  margin-top: 1em;
+  width: 50%;
+}
+
+.horizontal_histogram .labels {
+  overflow-x: hidden;
+}
+
+.horizontal_histogram .labels.left {
+  margin-right: 0.33em;
+}
+
+.horizontal_histogram .labels.right {
+  margin-left: 0.33em;
+}
+

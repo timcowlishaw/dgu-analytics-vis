@@ -32,7 +32,7 @@ SeriesLine.prototype = {
 
     this._y = d3.scale.linear()
       .range([0, this._height])
-      .domain([this._series.max().value(), 0]);
+      .domain([this._series.maxOfSeries().value(), 0]);
 
     this._svg = d3.select(this._element).append("svg")
       .attr("width", this._width + 2 * this._hMargin)

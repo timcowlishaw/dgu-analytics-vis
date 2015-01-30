@@ -20,6 +20,10 @@ Publisher.prototype = {
     return ""; 
   },
 
+  url: function() {
+    return "/publisher/" + this.id(); 
+  },
+  
   visits : function() {
     return parseInt(this._data["Visits"]); 
   },

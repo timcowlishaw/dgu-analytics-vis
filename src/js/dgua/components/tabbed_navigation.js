@@ -26,6 +26,12 @@ TabbedNavigation.prototype = {
     this._setupClickHandlers();
   },
 
+  select: function(title) {
+    var names = _.map(this._tabs, function(tab) { return tab[0]; });
+    var n = _.indexOf(names, title);
+    this._selectTab(n);
+  },
+
   _templateParams: function() {
     return {
       tabs : _.map(this._tabs, function(tab, i) {

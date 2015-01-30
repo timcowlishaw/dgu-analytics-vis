@@ -6,7 +6,7 @@ var slick = require("slick");
 
 domready(function() {
   if(slick.find("#dgu-analytics")) {
-    var application = new dgua.Application("#dgu-analytics", "data/");
+    var application = new dgua.Application("#dgu-analytics");
     application.init();
   }
 });

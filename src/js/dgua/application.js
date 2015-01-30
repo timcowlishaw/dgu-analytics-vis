@@ -4,10 +4,10 @@ var components = require("./components");
 var data = require("./data");
 var bind = require("./util/bind");
 var _ = require("underscore");
+var slick = require("slick");
 
-var Application = function(selector, dataPath) {
+var Application = function(selector) {
   this._selector = selector;
-  this._dataPath = dataPath;
   this._messageHandlers = {};
 };
 
@@ -16,13 +16,24 @@ Application.prototype = {
   nToDisplay: 5,
 
   init: function() {
-    data.Repository.loadDataSources(this._dataPath, bind(this, function(repo) {
+    this._element = slick.find(this._selector);
+    var paths = {
+      datasetsFilename: this._element.getAttribute("data-dgua-datasets-filename"),
+      publishersFilename: this._element.getAttribute("data-dgua-publishers-filename"),
+      mappingFilename: this._element.getAttribute("data-dgua-mapping-filename"),
+      statsFilename: this._element.getAttribute("data-dgua-stats-filename"),
+      countriesFilename: this._element.getAttribute("data-dgua-countries-filename"),
+      referrersFilename: this._element.getAttribute("data-dgua-referrers-filename")
+    };
 
+    data.Repository.loadDataSources(paths, bind(this, function(repo) {
+      var dashboard = new components.Dashboard(this, repo);
       var countries = new components.Countries(this, repo);
       var publishersDatasets = new components.PublishersDatasets(this, repo);
       var social = new components.Social(this, repo);
       var platforms = new components.Platforms(this, repo);
       var tabs = new components.TabbedNavigation(this, [
+        ["Overview", bind(dashboard, dashboard.render)],
         ["Datasets", bind(publishersDatasets, publishersDatasets.render)],
         ["Countries", bind(countries, countries.render)],
         ["Platforms", bind(platforms, platforms.render)],
@@ -30,6 +41,9 @@ Application.prototype = {
       ]);
 
       tabs.render(this._selector);
+      this.registerMessageHandler("switchTab", function(tab) {
+        tabs.select(tab);
+      });
     }));
   },
 
