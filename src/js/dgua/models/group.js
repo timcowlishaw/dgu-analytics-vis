@@ -44,7 +44,7 @@ Group.prototype = {
 
   max: function() {
     return _.max(
-      _.map(this._series, function(s) { return s.max(); }),
+      _.map(this._series, function(s) {  return s.max(); }),
       function(s) { return s.value(); }
     );
   },
@@ -95,6 +95,16 @@ Group.prototype = {
     return _.reduce(series, function(a, b) {
       return a.merge(b);
     });
+  },
+
+  filter: function(keeps) {
+    return this.map(function(series, key) {
+      if(_.contains(keeps, key)) return series; 
+    });
+  },
+
+  complement: function(discards) {
+    return this.filter(_.difference(this.keys(), discards));
   },
 
   oneVsAll: function(keep) {

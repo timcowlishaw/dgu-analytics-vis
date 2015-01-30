@@ -245,7 +245,6 @@ img {
   width: 100%;
 }
 
-
 .group_key_with_percentage tr td {
   padding-bottom: 0.5em;
 }
@@ -315,6 +314,11 @@ img {
   color: #999;
 }
 
+.platforms .computers_quote_container {
+  text-align: right;
+  margin-right: 2em;
+}
+
 .platforms .timeseries_container {
   margin-bottom:1em;
 }
@@ -357,4 +361,15 @@ img {
   margin: 0 auto;
   margin-top: 1em;
   width: 50%;
+}
+.horizontal_histogram .labels {
+  overflow-x: hidden;
+}
+
+.horizontal_histogram .labels.left {
+  margin-right: 0.33em;
+}
+
+.horizontal_histogram .labels.right {
+  margin-left: 0.33em;
 }

@@ -10,6 +10,9 @@ var GroupKeyWithPercentage = function(statistics, opts) {
   this._legendCallback = opts.legend;
   this._linkCallback = opts.link;
   this._statistics = statistics;
+  this._rowHeight = opts.rowHeight;
+  this._rowMargin = opts.rowMargin;
+  this._chip = opts.chip === undefined ? true : opts.chip;
 };
 
 GroupKeyWithPercentage.prototype = {
@@ -37,9 +40,11 @@ GroupKeyWithPercentage.prototype = {
     return {
       name: this._legendCallback ? this._legendCallback(pair[0]) : pair[0],
       url: this._linkCallback ? this._linkCallback(pair[0]) : undefined,
-      color: stat.color && stat.color(),
-      className: stat.color ? "with_chip" : "",
-      percentage: this._formatPercentage(pair[1].value())
+      color: this._chip && stat.color && stat.color(),
+      className: stat.color && this._chip ? "with_chip" : "",
+      percentage: this._formatPercentage(pair[1].value()),
+      rowHeight: this._rowHeight,
+      rowMargin: this._rowMargin
     };
   },
 
