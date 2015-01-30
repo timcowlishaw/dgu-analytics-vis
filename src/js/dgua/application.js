@@ -4,10 +4,10 @@ var components = require("./components");
 var data = require("./data");
 var bind = require("./util/bind");
 var _ = require("underscore");
+var slick = require("slick");
 
-var Application = function(selector, dataPath) {
+var Application = function(selector) {
   this._selector = selector;
-  this._dataPath = dataPath;
   this._messageHandlers = {};
 };
 
@@ -16,7 +16,18 @@ Application.prototype = {
   nToDisplay: 5,
 
   init: function() {
-    data.Repository.loadDataSources(this._dataPath, bind(this, function(repo) {
+    this._element = slick.find(this._selector);
+    var ds = this._element.dataset;
+    var paths = {
+      datasetsFilename: ds["dguaDatasetsFilename"],
+      publishersFilename: ds["dguaPublishersFilename"],
+      mappingFilename: ds["dguaMappingFilename"],
+      statsFilename: ds["dguaStatsFilename"],
+      countriesFilename: ds["dguaCountriesFilename"],
+      referrersFilename: ds["dguaReferrersFilename"]
+    };
+
+    data.Repository.loadDataSources(paths, bind(this, function(repo) {
       var dashboard = new components.Dashboard(this, repo);
       var countries = new components.Countries(this, repo);
       var publishersDatasets = new components.PublishersDatasets(this, repo);

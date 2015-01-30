@@ -69,7 +69,7 @@ HorizontalHistogram.prototype = {
       labels_left: this._labels && ! this._rtl,
       labels_right: this._labels && this._rtl,
       chart_pure_class: this._labels ? "pure-u-1-2 pure-u-md-1-2" : "pure-u-1 pure-u-md-1"
-    } 
+    }; 
   }
 };
 

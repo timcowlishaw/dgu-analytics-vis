@@ -7,8 +7,13 @@ var promises = require("../util/promises");
 var _ = require("underscore");
 var models = require("../models");
 
-var Repository = function(basePath) {
-  this._basePath = basePath;
+var Repository = function(paths) {
+  this._datasetsFilename =  paths["datasetsFilename"];
+  this._publishersFilename = paths["publishersFilename"];
+  this._mappingFilename = paths["mappingFilename"];
+  this._statsFilename = paths["statsFilename"];
+  this._countriesFilename = paths["countriesFilename"];
+  this._referredDatasetsFilename = paths["referrersFilename"];
   this._statisticsByName = {};
   this._countriesByName = {};
   this._datasetsById = {};
@@ -20,13 +25,6 @@ var Repository = function(basePath) {
 
 Repository.prototype = {
   
-  _datasetsFilename:  "datasets_all_all.csv",
-  _publishersFilename: "publishers_all.csv",
-  _mappingFilename: "datasets_publishers_mapping.csv",
-  _statsFilename: "stats_all.csv",
-  _countriesFilename: "country_latlngs.csv",
-  _referredDatasetsFilename: "referrers.csv",
-
   loadSources: function(callback) {
     var loadDatasets = this._loadCsvPromise(this._datasetsFilename);
     var loadPublishers = this._loadCsvPromise(this._publishersFilename);
@@ -147,7 +145,7 @@ Repository.prototype = {
 
   _loadCsvPromise: function(url) {
     return new Promise(bind(this, function(resolve, reject) {
-      d3.csv(this._basePath + url, function(error, response) {
+      d3.csv(url, function(error, response) {
         if(error) {
           reject(error);
          } else {

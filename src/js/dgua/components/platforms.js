@@ -25,7 +25,7 @@ Platforms.desktopBrowsers = ['Chrome', 'Firefox', 'IE with Chrome Frame',
         'Safari', 'Safari (in-app)', 'SeaMonkey',
        'Camino', 'Playstation 3', 'Mozilla',
         'Maxthon', 'YaBrowser', '(not set)', 'Konqueror', 'Links',
-       'SiteCon Browser', 'Iron'] 
+       'SiteCon Browser', 'Iron'];
 
 Platforms.prototype = {
   _template: fs.readFileSync(__dirname + "/../../../templates/platforms.mustache", "utf8"),
@@ -66,21 +66,21 @@ Platforms.prototype = {
       mobileQuote.render(this._selector + " " + this._mobileQuoteSelector);
       
       dom.text(slick.find(this._selector + " " + this._computersBrowsersHistSelector), "");
-      var computersBrowsers = this._repo.getStatistic("Browsers").filter(Platforms.desktopBrowsers).at(stat.time()).topN(4, true)
+      var computersBrowsers = this._repo.getStatistic("Browsers").filter(Platforms.desktopBrowsers).at(stat.time()).topN(4, true);
       var computersBrowsersKey = new ColorKey(computersBrowsers.keys(), colors);
       computersBrowsers = computersBrowsers.map(function(s, k) {
         return computersBrowsersKey.withColor(s, k);
       });
-      var computersBrowsersHist = new HorizontalHistogram(computersBrowsers, {labels: true})
+      var computersBrowsersHist = new HorizontalHistogram(computersBrowsers, {labels: true});
       computersBrowsersHist.render(this._selector + " " + this._computersBrowsersHistSelector);
  
       dom.text(slick.find(this._selector + " " + this._mobileHistSelector), "");
-      var mobileOses = this._repo.getStatistic("Operating Systems").filter(Platforms.mobile).at(stat.time()).topN(4, true)
+      var mobileOses = this._repo.getStatistic("Operating Systems").filter(Platforms.mobile).at(stat.time()).topN(4, true);
       var mobileKey = new ColorKey(mobileOses.keys(), colors);
       mobileOses = mobileOses.map(function(s, k) {
         return mobileKey.withColor(s, k);
       });
-      var mobileHist = new HorizontalHistogram(mobileOses, {labels: true, rtl: true})
+      var mobileHist = new HorizontalHistogram(mobileOses, {labels: true, rtl: true});
       mobileHist.render(this._selector + " " + this._mobileHistSelector);
 
     } 
